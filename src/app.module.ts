@@ -6,7 +6,7 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { ApplicationModule } from './application/application.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { CostumerEntity } from './domain/entity/costumer.entity';
+import { CostumerEntity } from './domain/entities/costumer.entity';
 
 @Module({
   imports: [
