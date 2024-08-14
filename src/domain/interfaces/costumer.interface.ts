@@ -3,9 +3,10 @@ import {
   CreateCostumerDto,
   UpdateCostumerDto,
 } from 'src/application/dto/costumer.dto';
+import { TCostumerDtoOrNull } from '../types/costumer.type';
 
 export interface ICostumerRepository {
-  create(createCostumerDto: CreateCostumerDto): Promise<CostumerDto | null>;
+  create(createCostumerDto: CreateCostumerDto): Promise<TCostumerDtoOrNull>;
   delete(id: string): Promise<void>;
   update(
     id: string,
@@ -18,7 +19,7 @@ export interface ICostumerRepository {
 export interface ICostumerService {
   createCostumer(
     createCostumerDto: CreateCostumerDto,
-  ): Promise<CostumerDto | null>;
+  ): Promise<TCostumerDtoOrNull>;
   deleteCostumer(id: string): Promise<void>;
   updateCostumer(
     id: string,
