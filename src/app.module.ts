@@ -7,6 +7,8 @@ import { ApplicationModule } from './application/application.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { CostumerEntity } from './domain/entities/costumer.entity';
+import { AccountService } from './account/account.service';
+import { AccountEntity } from './domain/entities/account.entity';
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { CostumerEntity } from './domain/entities/costumer.entity';
       port: parseInt(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      entities: [CostumerEntity],
+      entities: [CostumerEntity, AccountEntity],
       synchronize: true,
     }),
     ApplicationModule,
@@ -27,6 +29,6 @@ import { CostumerEntity } from './domain/entities/costumer.entity';
     InfrastructureModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AccountService],
 })
 export class AppModule {}

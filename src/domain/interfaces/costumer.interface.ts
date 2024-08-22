@@ -15,7 +15,6 @@ export interface ICostumerRepository {
   findAll(): Promise<CostumerDto[]>;
   findOne(id: string): Promise<CostumerDto>;
 }
-
 export interface ICostumerService {
   createCostumer(
     createCostumerDto: CreateCostumerDto,

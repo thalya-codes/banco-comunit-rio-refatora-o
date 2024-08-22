@@ -1,10 +1,14 @@
 import {
   Column,
   Entity,
+  JoinColumn,
+  // ManyToMany,
+  ManyToOne,
   // JoinColumn,
   // ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AccountEntity } from './account.entity';
 // import { AccountEntity } from './Account.orm';
 
 @Entity()
@@ -12,26 +16,24 @@ export class CostumerEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 300 })
   fullname: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 300 })
   address: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   telephone: string;
 
   @Column()
   manager: string;
 
   @Column()
-  accounts: string;
+  @JoinColumn()
+  @ManyToOne(() => AccountEntity, (account) => account.costumer)
+  accounts: AccountEntity;
   //TODO: Descomentar código abaixo quando as entidades Manager e Account forem criadas
   // @OneToMany(() => ManagerEnity, (manager) => manager.costumers)
-  // @JoinColumn()
-  // accounts: AccountEntity;
-
-  // @ManyToOne(() => AccountEntity, (account) => account.costumer)
   // @JoinColumn()
   // accounts: AccountEntity;
 

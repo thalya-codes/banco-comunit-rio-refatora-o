@@ -1,11 +1,14 @@
+import { AccountDto } from './account.dto';
+
+//TODO: Trocar interface por class com validators
 export type CostumerDto = {
   id: string;
   fullname: string;
   address: string;
   telephone: string;
   salaryIncome: number;
-  manager: any; //TODO: Adicionar tipagem correta quando for implementado
-  accounts: any; //TODO: Adicionar tipagem correta quando for implementado
+  manager: any; //TODO: Adicionar dto correto quando for implementado
+  accounts: AccountDto;
 };
 
 export type CreateCostumerDto = Omit<CostumerDto, 'id'>;

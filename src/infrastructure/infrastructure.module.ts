@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CostumerRepository } from './repositories/costumer.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CostumerEntity } from 'src/domain/entities/costumer.entity';
+import { AccountRepository } from './repositories/account.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CostumerEntity])],
@@ -10,7 +11,11 @@ import { CostumerEntity } from 'src/domain/entities/costumer.entity';
       provide: 'ICostumerRepository',
       useClass: CostumerRepository,
     },
+    {
+      provide: 'IAccountRepository',
+      useClass: AccountRepository,
+    },
   ],
-  exports: ['ICostumerRepository'],
+  exports: ['ICostumerRepository', 'IAccountRepository'],
 })
 export class InfrastructureModule {}
