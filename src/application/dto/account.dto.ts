@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { CostumerDto } from './costumer.dto';
+import { AccountType } from 'src/domain/enums/business.enum';
 
 export class AccountNumberDto {
   @IsNotEmpty()
@@ -22,7 +22,7 @@ export class DepositDto extends AccountNumberDto {
 export class IdDto {
   @IsNotEmpty()
   @IsString()
-  accountNumber: string;
+  id: IdDto;
 }
 
 export class TransactionDto {
@@ -42,19 +42,56 @@ export class TransactionDto {
 export class AccountDto {
   @IsNotEmpty()
   @IsString()
-  id: string;
+  id: IdDto;
 
   @IsNotEmpty()
   @IsNumber()
   balance: number;
 
   @IsNotEmpty()
-  costumer: CostumerDto;
+  costumer: IdDto[];
 
   @IsNotEmpty()
   @IsString()
+  accountNumber: IdDto;
+
+  @IsNotEmpty()
+  @IsNumber()
+  accountType: number;
+}
+
+export class AlterAccountTypeDto {
+  @IsString()
+  @IsNotEmpty()
+  id: IdDto;
+
+  @IsNotEmpty()
+  @IsNumber()
+  newAccountType: number;
+}
+
+export class CreateAccountDto {
+  @IsString()
+  @IsNotEmpty()
+  managerId: IdDto;
+
+  @IsString()
+  @IsNotEmpty()
+  customerId: IdDto;
+
+  @IsNumber()
+  @IsNotEmpty()
+  accountType: AccountType;
+
+  @IsNumber()
+  @IsNotEmpty()
+  balance: number;
+
+  @IsString()
+  @IsNotEmpty()
   accountNumber: string;
 }
 
-export type CreateAccountDto = Omit<AccountDto, 'id'>;
-export type UpdateAccountDto = Partial<Omit<AccountDto, 'id'>>;
+export type UpdateAccountDto = Partial<
+  Omit<AccountDto, 'id' | 'accountNumber'>
+>;

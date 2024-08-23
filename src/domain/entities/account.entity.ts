@@ -27,4 +27,7 @@ export class AccountEntity {
 
   @Column({ type: 'varchar', unique: true, length: 13 })
   accountNumber: string;
+
+  @Column({ type: 'simple-array', unique: true, nullable: true })
+  pix_keys: string[] | number[] | null;
 }

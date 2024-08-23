@@ -10,6 +10,7 @@ import {
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from 'src/domain/enums/error-messages.enum';
 
+type FindOneDto = { accountNumber: string } | { id: string };
 @Injectable()
 export class AccountRepository implements IAccountRepository {
   constructor(
@@ -23,7 +24,7 @@ export class AccountRepository implements IAccountRepository {
     return await this.accountRepository.save(entity);
   }
 
-  async findOne(query: string): Promise<AccountDto> {
+  async findOne(query: FindOneDto): Promise<AccountDto> {
     return await this.accountRepository.findOne({ where: query });
   }
 
