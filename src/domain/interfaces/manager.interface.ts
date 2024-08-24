@@ -3,7 +3,11 @@ import {
   CreateCostumerDto,
 } from 'src/application/dto/costumer.dto';
 import { AccountType } from '../enums/business.enum';
-import { CloseAccountDto, OpenAccountDto } from 'src/application/dto/manager.dto';
+import {
+  CloseAccountDto,
+  OpenAccountDto,
+} from 'src/application/dto/manager.dto';
+import { AccountDto } from 'src/application/dto/account.dto';
 
 export interface IManagerService {
   createManager;
@@ -18,8 +22,8 @@ export interface IManagerService {
   openAccount(openAccountDto: OpenAccountDto): void; //
   closeAccount(closeAccountDto: CloseAccountDto): void;
   alterAccountType(
-    client: Customer,
-    account: AccountAbstract,
+    client: CostumerDto,
+    account: AccountDto,
     newType: string,
   ): void;
 }

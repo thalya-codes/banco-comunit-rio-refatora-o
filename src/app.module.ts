@@ -7,7 +7,7 @@ import { ApplicationModule } from './application/application.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { CostumerEntity } from './domain/entities/costumer.entity';
-import { AccountService } from './account/account.service';
+import { AccountService } from './domain/service/account.service';
 import { AccountEntity } from './domain/entities/account.entity';
 
 @Module({

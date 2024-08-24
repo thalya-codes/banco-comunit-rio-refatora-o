@@ -11,8 +11,8 @@ import {
 
 export interface IAccountRepository {
   create(createAccountDto: CreateAccountDto): Promise<AccountDto | null>;
-  delete(id: IdDto): Promise<void>;
-  update(id: IdDto, updateAccountDto: UpdateAccountDto): Promise<AccountDto>;
+  delete(id: string): Promise<void>;
+  update(id: string, updateAccountDto: UpdateAccountDto): Promise<AccountDto>;
   findAll(): Promise<AccountDto[]>;
   findOne(query: AccountNumberDto | IdDto): Promise<AccountDto>;
 }
@@ -23,9 +23,9 @@ export interface IAccountService {
   generateAccountNumber(): string;
   getAccount(getAccountDto: AccountNumberDto): Promise<AccountDto>;
   getAllAccounts(): Promise<AccountDto[]>;
-  deleteAccount(id: IdDto): void;
+  deleteAccount(id: string): void;
   updateAccount(
-    id: IdDto,
+    id: string,
     updateAccountDto: Partial<CreateAccountDto>,
   ): Promise<AccountDto>;
   alterAccountType(
@@ -36,6 +36,6 @@ export interface IAccountService {
   deposit(depositDto: TransactionDto): void;
   withdraw(withdrawDto: WithdrawDto): Promise<{ balance: number }>;
   // transfer(transferDto: TransactionDto): Promise<{ balance: number }>;
-  consultBalance(consultBalanceDto: IdDto): Promise<{ balance: number }>;
-  getAccount(id: IdDto): Promise<AccountDto>;
+  consultBalance(id: string): Promise<{ balance: number }>;
+  getAccount(id: IdDto | AccountNumberDto): Promise<AccountDto>;
 }

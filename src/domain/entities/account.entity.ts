@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CostumerEntity } from './costumer.entity';
+import { CostumerDto } from 'src/application/dto/costumer.dto';
 
 @Entity()
 @Check('"accountType" = 0 OR "accountType" = 1')
@@ -23,7 +24,7 @@ export class AccountEntity {
   @Column({ type: 'array' })
   @JoinColumn()
   @OneToMany(() => CostumerEntity, (costumer) => costumer.accounts)
-  costumer: CostumerEntity;
+  costumer: string[];
 
   @Column({ type: 'varchar', unique: true, length: 13 })
   accountNumber: string;

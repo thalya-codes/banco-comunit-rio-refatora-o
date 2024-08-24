@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AccountEntity } from './account.entity';
+import { AccountDto } from 'src/application/dto/account.dto';
 // import { AccountEntity } from './Account.orm';
 
 @Entity()

@@ -48,9 +48,11 @@ export class AccountService implements IAccountService {
     }
   }
 
-  async getAccount(id: IdDto | AccountNumberDto): Promise<AccountDto> {
+  async getAccount(
+    getAccountDto: IdDto | AccountNumberDto,
+  ): Promise<AccountDto> {
     try {
-      const account = await this.accountRepository.findOne(id);
+      const account = await this.accountRepository.findOne(getAccountDto);
       if (!account) throw new Error(ErrorMessages.NOT_FOUND_ACCOUNT);
 
       return account;
@@ -68,7 +70,7 @@ export class AccountService implements IAccountService {
   }
 
   async updateAccount(
-    id: IdDto,
+    id: string,
     updateAccountDto: Partial<CreateAccountDto>,
   ): Promise<AccountDto> {
     try {
@@ -78,7 +80,7 @@ export class AccountService implements IAccountService {
     }
   }
 
-  async deleteAccount(id: IdDto) {
+  async deleteAccount(id: string) {
     try {
       await this.accountRepository.delete(id);
     } catch (error) {
@@ -150,10 +152,10 @@ export class AccountService implements IAccountService {
     }
   }
 
-  async consultBalance(consultBalanceDto: IdDto): Promise<{ balance: number }> {
+  async consultBalance(id: string): Promise<{ balance: number }> {
     try {
       const account = await this.getAccount({
-        id: consultBalanceDto.id,
+        id,
       });
       return { balance: account.balance };
     } catch (error) {

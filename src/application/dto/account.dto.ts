@@ -22,7 +22,7 @@ export class DepositDto extends AccountNumberDto {
 export class IdDto {
   @IsNotEmpty()
   @IsString()
-  id: IdDto;
+  id: string;
 }
 
 export class TransactionDto {
@@ -42,18 +42,18 @@ export class TransactionDto {
 export class AccountDto {
   @IsNotEmpty()
   @IsString()
-  id: IdDto;
+  id: string;
 
   @IsNotEmpty()
   @IsNumber()
   balance: number;
 
   @IsNotEmpty()
-  costumer: IdDto[];
+  costumer: string[];
 
   @IsNotEmpty()
   @IsString()
-  accountNumber: IdDto;
+  accountNumber: string;
 
   @IsNotEmpty()
   @IsNumber()
@@ -63,7 +63,7 @@ export class AccountDto {
 export class AlterAccountTypeDto {
   @IsString()
   @IsNotEmpty()
-  id: IdDto;
+  id: string;
 
   @IsNotEmpty()
   @IsNumber()
@@ -73,11 +73,11 @@ export class AlterAccountTypeDto {
 export class CreateAccountDto {
   @IsString()
   @IsNotEmpty()
-  managerId: IdDto;
+  managerId: string;
 
   @IsString()
   @IsNotEmpty()
-  customerId: IdDto;
+  customerId: string;
 
   @IsNumber()
   @IsNotEmpty()
