@@ -25,6 +25,11 @@ export class IdDto {
   id: string;
 }
 
+export class PixKeyDto {
+  @IsNotEmpty()
+  pix_keys: string | number;
+}
+
 export class TransactionDto {
   @IsNotEmpty()
   @IsNumber()

@@ -14,6 +14,8 @@ import {
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from '../enums/error-messages.enum';
 import { v4 as uuidv4 } from 'uuid';
+import { PaymentFactory } from '../factories/payment.factory';
+import { PixPayment } from '../models/payment/pix.payment.model';
 
 //operações -> update manager
 //operações -> update manager
@@ -120,12 +122,29 @@ export class AccountService implements IAccountService {
     }
   }
 
-  //conta de destino
-  //targetAccount
-  //originAccount
-  //a forma como deposito sera feito(via pix(transferência(chave pix / número da conta)) ou boleto)
+  //destinationQuerySearchParam
+  //
 
-  //TODO: Decidir formato do retorno
+  /*
+    Pagamento por boleto
+     -  conta de origem
+     -  conta de destino
+     -  número do boleto
+     -  vencimento
+     -  valor a ser pago/transferido
+  */
+
+  /*
+      Pagamento por PIX 
+        - conta de origem
+        - chave pix da conta de destino
+        - valor a ser transferido
+    */
+  async transfer(transferDto: any) {
+    const pixPayment = new PixPayment();
+    await pixPayment.processPix(this.accountRepository, transferDto);
+  }
+
   async deposit(transactionDto: TransactionDto) {
     try {
       const originAccount = await this.getAccount({

@@ -4,6 +4,7 @@ import {
   AlterAccountTypeDto,
   CreateAccountDto,
   IdDto,
+  PixKeyDto,
   TransactionDto,
   UpdateAccountDto,
   WithdrawDto,
@@ -14,7 +15,7 @@ export interface IAccountRepository {
   delete(id: string): Promise<void>;
   update(id: string, updateAccountDto: UpdateAccountDto): Promise<AccountDto>;
   findAll(): Promise<AccountDto[]>;
-  findOne(query: AccountNumberDto | IdDto): Promise<AccountDto>;
+  findOne(query: AccountNumberDto | IdDto | PixKeyDto): Promise<AccountDto>;
 }
 
 //como meu repositório fica dentro do meu service e está operação fica dentro do meu service

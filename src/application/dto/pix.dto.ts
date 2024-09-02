@@ -3,10 +3,6 @@ import { PixKeyType } from 'src/domain/enums/business.enum';
 
 export class CreatePixKeyDto {
   @IsNotEmpty()
-  @IsString()
-  accountId: string;
-
-  @IsNotEmpty()
   @IsNumber()
   pixKeyType: PixKeyType;
 

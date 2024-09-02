@@ -10,3 +10,8 @@ export enum PixKeyType {
   CELLPHONE = 3,
   RANDOM = 4,
 }
+
+export enum PaymentMethod {
+  PIX = 911,
+  BANK_SLIP = 822,
+}
