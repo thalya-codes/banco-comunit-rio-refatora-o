@@ -14,8 +14,8 @@ import {
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from '../enums/error-messages.enum';
 import { v4 as uuidv4 } from 'uuid';
-import { PaymentFactory } from '../factories/payment.factory';
-import { PixPayment } from '../models/payment/pix.payment.model';
+// import { PaymentFactory } from '../factories/payment.factory';
+// import { PixPayment } from '../models/payment/pix.payment.model';
 
 //operações -> update manager
 //operações -> update manager
@@ -140,10 +140,11 @@ export class AccountService implements IAccountService {
         - chave pix da conta de destino
         - valor a ser transferido
     */
-  async transfer(transferDto: any) {
-    const pixPayment = new PixPayment();
-    await pixPayment.processPix(this.accountRepository, transferDto);
-  }
+
+  // async transfer(transferDto: any) {
+  //   const pixPayment = new PixPayment();
+  //   await pixPayment.processPix(this.accountRepository, transferDto);
+  // }
 
   async deposit(transactionDto: TransactionDto) {
     try {

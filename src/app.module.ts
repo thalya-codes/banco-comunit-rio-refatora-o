@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CostumerEntity } from './domain/entities/costumer.entity';
 import { AccountService } from './domain/service/account.service';
 import { AccountEntity } from './domain/entities/account.entity';
+import { ManagerEntity } from './domain/entities/manager.entity';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { AccountEntity } from './domain/entities/account.entity';
       port: parseInt(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      entities: [CostumerEntity, AccountEntity],
+      // url: process.env.DATABASE_URL,
+      entities: [CostumerEntity, AccountEntity, ManagerEntity],
       synchronize: true,
     }),
     ApplicationModule,

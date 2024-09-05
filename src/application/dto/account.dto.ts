@@ -54,7 +54,7 @@ export class AccountDto {
   balance: number;
 
   @IsNotEmpty()
-  costumer: string[];
+  customersId: string[];
 
   @IsNotEmpty()
   @IsString()
@@ -63,6 +63,9 @@ export class AccountDto {
   @IsNotEmpty()
   @IsNumber()
   accountType: number;
+
+  @IsNotEmpty()
+  pix_keys: string[] | number[];
 }
 
 export class AlterAccountTypeDto {
@@ -91,7 +94,9 @@ export class CreateAccountDto {
   @IsNumber()
   @IsNotEmpty()
   balance: number;
+}
 
+export class CreateAccountRepositoryDto extends CreateAccountDto {
   @IsString()
   @IsNotEmpty()
   accountNumber: string;

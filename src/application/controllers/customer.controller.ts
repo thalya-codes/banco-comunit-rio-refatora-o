@@ -15,20 +15,23 @@ import {
   CreateCostumerDto,
   UpdateCostumerDto,
 } from '../dto/costumer.dto';
+import { IManagerService } from 'src/domain/interfaces/manager.interface';
 
 //TODO: Adicionar tratamentos de erro e validações mais específicas
-@Controller('costumer')
+@Controller('customer')
 export class CostumerController {
   constructor(
     @Inject('ICostumerService')
     private readonly costumerService: ICostumerService,
+    @Inject('IManagerService')
+    private readonly managerService: IManagerService,
   ) {}
 
-  @Post()
+  @Post('create')
   async createCostumer(
     @Body() createCostumer: CreateCostumerDto,
   ): Promise<CostumerDto> {
-    return await this.costumerService.createCostumer(createCostumer);
+    return await this.managerService.addCustomer(createCostumer);
   }
 
   @Get()
@@ -49,8 +52,8 @@ export class CostumerController {
     return await this.costumerService.updateCostumer(id, updateCostumerDto);
   }
 
-  @Delete(':id')
-  async deleteCostumer(@Param() { id }: TIdParam) {
-    return await this.costumerService.deleteCostumer(id);
-  }
+  // @Delete(':id')
+  // async deleteCostumer(@Param() { id }: TIdParam) {
+  //   return await this.managerService.removeCustomer(id);
+  // }
 }

@@ -4,12 +4,14 @@ import {
   JoinColumn,
   // ManyToMany,
   ManyToOne,
+  OneToMany,
   // JoinColumn,
   // ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AccountEntity } from './account.entity';
 import { AccountDto } from 'src/application/dto/account.dto';
+import { ManagerEntity } from './manager.entity';
 // import { AccountEntity } from './Account.orm';
 
 @Entity()
@@ -26,13 +28,16 @@ export class CostumerEntity {
   @Column({ type: 'varchar' })
   telephone: string;
 
-  @Column()
-  manager: string;
+  //add relação
+  @Column({ type: 'varchar' })
+  // @ManyToOne(() => ManagerEntity, (manager) => manager.customers)
+  managerId: string;
 
-  @Column()
+  @Column({ type: 'simple-array' })
   @JoinColumn()
-  @ManyToOne(() => AccountEntity, (account) => account.costumer)
-  accounts: AccountEntity;
+  @ManyToOne(() => AccountEntity, (account) => account.customersId)
+  accounts: AccountDto[];
+
   //TODO: Descomentar código abaixo quando as entidades Manager e Account forem criadas
   // @OneToMany(() => ManagerEnity, (manager) => manager.costumers)
   // @JoinColumn()

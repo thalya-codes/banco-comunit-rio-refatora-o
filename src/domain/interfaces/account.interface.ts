@@ -3,6 +3,7 @@ import {
   AccountNumberDto,
   AlterAccountTypeDto,
   CreateAccountDto,
+  CreateAccountRepositoryDto,
   IdDto,
   PixKeyDto,
   TransactionDto,
@@ -11,11 +12,14 @@ import {
 } from 'src/application/dto/account.dto';
 
 export interface IAccountRepository {
-  create(createAccountDto: CreateAccountDto): Promise<AccountDto | null>;
+  create(
+    createAccountDto: CreateAccountRepositoryDto,
+  ): Promise<AccountDto | null>;
   delete(id: string): Promise<void>;
   update(id: string, updateAccountDto: UpdateAccountDto): Promise<AccountDto>;
   findAll(): Promise<AccountDto[]>;
   findOne(query: AccountNumberDto | IdDto | PixKeyDto): Promise<AccountDto>;
+  save(account: AccountDto): Promise<AccountDto>;
 }
 
 //como meu repositório fica dentro do meu service e está operação fica dentro do meu service

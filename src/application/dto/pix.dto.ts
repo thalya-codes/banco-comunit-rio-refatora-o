@@ -3,10 +3,12 @@ import { PixKeyType } from 'src/domain/enums/business.enum';
 
 export class CreatePixKeyDto {
   @IsNotEmpty()
-  @IsNumber()
-  pixKeyType: PixKeyType;
+  @IsString()
+  accountNumber: string;
 
-  pixKey?: string | number | null;
+  @IsNotEmpty()
+  @IsNumber()
+  key_type: PixKeyType;
 }
 
 export class ProcessPixDto {

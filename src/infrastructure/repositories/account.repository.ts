@@ -5,7 +5,7 @@ import { AccountEntity } from 'src/domain/entities/account.entity';
 import { IAccountRepository } from 'src/domain/interfaces/account.interface';
 import {
   AccountDto,
-  CreateAccountDto,
+  CreateAccountRepositoryDto,
   UpdateAccountDto,
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from 'src/domain/enums/error-messages.enum';
@@ -19,7 +19,9 @@ export class AccountRepository implements IAccountRepository {
   ) {}
 
   //TODO: Verificar se a validação está funcionando
-  async create(createAccountDto: CreateAccountDto): Promise<AccountDto | null> {
+  async create(
+    createAccountDto: CreateAccountRepositoryDto,
+  ): Promise<AccountDto | null> {
     const entity = this.accountRepository.create(createAccountDto);
     return await this.accountRepository.save(entity);
   }
@@ -44,5 +46,9 @@ export class AccountRepository implements IAccountRepository {
   ): Promise<AccountDto> {
     await this.accountRepository.update(id, updateAccountDto);
     return await this.accountRepository.findOne({ where: { id } });
+  }
+
+  async save(account: AccountDto) {
+    return await this.accountRepository.save(account);
   }
 }

@@ -4,10 +4,14 @@ import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CostumerEntity } from './entities/costumer.entity';
 import { AccountEntity } from './entities/account.entity';
+import { PixService } from './service/pix.service';
+import { ManagerEntity } from './entities/manager.entity';
+import { ManagerService } from './service/manager.service';
+import { AccountService } from './service/account.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([CostumerEntity, AccountEntity]),
+    TypeOrmModule.forFeature([CostumerEntity, AccountEntity, ManagerEntity]),
     InfrastructureModule,
   ],
   providers: [
@@ -15,7 +19,24 @@ import { AccountEntity } from './entities/account.entity';
       provide: 'ICostumerService',
       useClass: CostumerService,
     },
+    {
+      provide: 'IPixService',
+      useClass: PixService,
+    },
+    {
+      provide: 'IManagerService',
+      useClass: ManagerService,
+    },
+    {
+      provide: 'IAccountService',
+      useClass: AccountService,
+    },
   ],
-  exports: ['ICostumerService'],
+  exports: [
+    'ICostumerService',
+    'IPixService',
+    'IManagerService',
+    'IAccountService',
+  ],
 })
 export class DomainModule {}

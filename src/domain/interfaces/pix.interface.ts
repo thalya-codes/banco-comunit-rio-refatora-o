@@ -1,10 +1,7 @@
 import { CreatePixKeyDto, ProcessPixDto } from 'src/application/dto/pix.dto';
-import { IAccountRepository } from './account.interface';
+import { AccountDto } from 'src/application/dto/account.dto';
 
-export interface IPixPaymentModel {
-  createPixKey(createPixKeyDto: CreatePixKeyDto): Promise<string | number>; //retornar chave criada
-  processPix(
-    accountRepository: IAccountRepository,
-    processPixDto: ProcessPixDto,
-  ): void; //retornar comprovan
+export interface IPixService {
+  createKey(createPixKeyDto: CreatePixKeyDto): Promise<AccountDto>; //retornar chave criada
+  processPix(processPixDto: ProcessPixDto): void; //retornar comprovan
 }

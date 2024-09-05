@@ -18,17 +18,17 @@ export class AccountEntity {
   @Column({ type: 'float' })
   balance: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   accountType: number;
 
-  @Column({ type: 'array' })
+  @Column({ type: 'simple-array', default: [] })
   @JoinColumn()
   @OneToMany(() => CostumerEntity, (costumer) => costumer.accounts)
-  costumer: string[];
+  customersId: string[];
 
   @Column({ type: 'varchar', unique: true, length: 13 })
   accountNumber: string;
 
-  @Column({ type: 'simple-array', unique: true, nullable: true })
-  pix_keys: string[] | number[] | null;
+  @Column({ type: 'simple-array', unique: true, nullable: true, default: [] })
+  pix_keys: string[] | number[];
 }

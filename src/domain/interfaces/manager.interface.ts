@@ -1,29 +1,41 @@
+import { AccountDto } from 'src/application/dto/account.dto';
 import {
   CostumerDto,
   CreateCostumerDto,
 } from 'src/application/dto/costumer.dto';
-import { AccountType } from '../enums/business.enum';
 import {
-  CloseAccountDto,
+  ManagerDto,
+  ManagerBaseDto,
   OpenAccountDto,
 } from 'src/application/dto/manager.dto';
-import { AccountDto } from 'src/application/dto/account.dto';
+
+export interface IManagerRepository {
+  create(createManagerDto: ManagerBaseDto): Promise<ManagerDto | null>;
+  delete(id: string): Promise<void>;
+  update(
+    id: string,
+    updateManagerDto: Partial<ManagerBaseDto>,
+  ): Promise<ManagerDto>;
+  findAll(): Promise<ManagerDto[]>;
+  findOne(id: string): Promise<ManagerDto>;
+}
 
 export interface IManagerService {
-  createManager;
-  findOneManager;
-  findAllManager;
-  deleteManager;
-  updateManager;
+  // findAllManager;
+  // deleteManager;
+  // updateManager;
 
-  getCustomer(id: string): CostumerDto; //DO ID DO CLIENTE
-  addCustomer(customerDto: CreateCostumerDto): void;
-  removeCustomer(id: string): void;
-  openAccount(openAccountDto: OpenAccountDto): void; //
-  closeAccount(closeAccountDto: CloseAccountDto): void;
-  alterAccountType(
-    client: CostumerDto,
-    account: AccountDto,
-    newType: string,
-  ): void;
+  createManager(createManagerDto: ManagerBaseDto): Promise<ManagerDto>;
+
+  findOneManager(id: string): Promise<CostumerDto>;
+  // getCustomer(id: string): CostumerDto; //DO ID DO CLIENTE
+  addCustomer(customerDto: CreateCostumerDto): Promise<CostumerDto>;
+  // removeCustomer(id: string): Promise<void>;
+  openAccount(openAccountDto: OpenAccountDto): Promise<AccountDto>; //
+  // closeAccount(closeAccountDto: CloseAccountDto): void;
+  // alterAccountType(
+  //   client: CostumerDto,
+  //   account: AccountDto,
+  //   newType: string,
+  // ): void;
 }
