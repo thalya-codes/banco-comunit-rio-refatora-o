@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { IManagerService } from 'src/domain/interfaces/manager.interface';
 import { ManagerBaseDto, ManagerDto, OpenAccountDto } from '../dto/manager.dto';
 import { AccountDto } from '../dto/account.dto';
@@ -29,7 +37,13 @@ export class ManagerController {
     return await this.managerService.findOneManager(id);
   }
 
+  @Post()
   async openAccount(openAccountDto: OpenAccountDto): Promise<AccountDto> {
     return await this.managerService.openAccount(openAccountDto);
+  }
+
+  @Delete(':id')
+  async deleteManager(@Param() { id }: { id: string }): Promise<void> {
+    return await this.managerService.deleteManager(id);
   }
 }

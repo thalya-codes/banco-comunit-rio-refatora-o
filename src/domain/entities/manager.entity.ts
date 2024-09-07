@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { CostumerEntity } from './costumer.entity';
-import { CostumerDto } from 'src/application/dto/costumer.dto';
 
 @Entity()
 export class ManagerEntity {
@@ -16,7 +15,7 @@ export class ManagerEntity {
   @Column({ type: 'simple-array', nullable: true })
   @OneToMany(() => CostumerEntity, (costumer) => costumer.managerId, {
     eager: true,
-    cascade: ['insert'],
+    cascade: true,
   })
   customers: string[];
 }
