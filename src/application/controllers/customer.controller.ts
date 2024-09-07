@@ -52,8 +52,8 @@ export class CostumerController {
     return await this.costumerService.updateCostumer(id, updateCostumerDto);
   }
 
-  // @Delete(':id')
-  // async deleteCostumer(@Param() { id }: TIdParam) {
-  //   return await this.managerService.removeCustomer(id);
-  // }
+  @Delete(':id')
+  async deleteCostumer(@Param() { id }: TIdParam) {
+    return await this.managerService.removeCustomer(id);
+  }
 }

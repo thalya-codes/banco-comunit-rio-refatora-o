@@ -28,16 +28,20 @@ export class ManagerService implements IManagerService {
     return await this.managerRepository.create(createManagerDto);
   }
 
-  async addCustomer(addCustomerDto: CreateCostumerDto): Promise<CostumerDto> {
-    return await this.customerService.createCostumer(addCustomerDto);
-  }
-
   async findAllManagers(): Promise<ManagerDto[]> {
     return await this.managerRepository.findAll();
   }
 
   async findOneManager(id: string): Promise<ManagerDto> {
     return await this.managerRepository.findOne(id);
+  }
+
+  async deleteManager(id: string): Promise<void> {
+    return await this.managerRepository.delete(id);
+  }
+
+  async addCustomer(addCustomerDto: CreateCostumerDto): Promise<CostumerDto> {
+    return await this.customerService.createCostumer(addCustomerDto);
   }
 
   async openAccount(openAccountDto: CreateAccountDto): Promise<AccountDto> {
@@ -61,5 +65,9 @@ export class ManagerService implements IManagerService {
     }
 
     return await this.accountService.createAccount(openAccountDto);
+  }
+
+  async removeCustomer(id: string): Promise<void> {
+    return await this.customerService.deleteCostumer(id);
   }
 }

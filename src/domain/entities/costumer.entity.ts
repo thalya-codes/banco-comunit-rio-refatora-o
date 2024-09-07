@@ -33,9 +33,11 @@ export class CostumerEntity {
   @ManyToOne(() => ManagerEntity, (manager) => manager.customers)
   managerId: string;
 
-  @Column({ type: 'simple-array' })
+  @Column({ type: 'simple-array', nullable: true })
   @JoinColumn()
-  @ManyToOne(() => AccountEntity, (account) => account.customersId)
+  @ManyToOne(() => AccountEntity, (account) => account.customersId, {
+    onDelete: 'CASCADE',
+  })
   accounts: AccountDto[];
 
   //TODO: Descomentar código abaixo quando as entidades Manager e Account forem criadas

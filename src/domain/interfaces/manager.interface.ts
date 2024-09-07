@@ -26,13 +26,13 @@ export interface IManagerService {
   // updateManager;
 
   createManager(createManagerDto: ManagerBaseDto): Promise<ManagerDto>;
-
   findAllManagers(): Promise<ManagerDto[]>;
-
   findOneManager(id: string): Promise<ManagerDto>;
+  deleteManager(id: string): Promise<void>;
+
   // getCustomer(id: string): ManagerDto; //DO ID DO CLIENTE
   addCustomer(customerDto: CreateCostumerDto): Promise<CostumerDto>;
-  // removeCustomer(id: string): Promise<void>;
+  removeCustomer(id: string): Promise<void>;
   openAccount(openAccountDto: OpenAccountDto): Promise<AccountDto>; //
   // closeAccount(closeAccountDto: CloseAccountDto): void;
   // alterAccountType(
