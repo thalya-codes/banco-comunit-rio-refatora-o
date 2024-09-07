@@ -21,7 +21,7 @@ export class AccountEntity {
   @Column({ type: 'int' })
   accountType: number;
 
-  @Column({ type: 'simple-array', default: [] })
+  @Column({ type: 'simple-array' })
   @JoinColumn()
   @OneToMany(() => CostumerEntity, (costumer) => costumer.accounts)
   customersId: string[];
@@ -29,6 +29,6 @@ export class AccountEntity {
   @Column({ type: 'varchar', unique: true, length: 13 })
   accountNumber: string;
 
-  @Column({ type: 'simple-array', unique: true, nullable: true, default: [] })
+  @Column({ type: 'simple-array', unique: true, nullable: true })
   pix_keys: string[] | number[];
 }

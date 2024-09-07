@@ -13,7 +13,7 @@ export class ManagerEntity {
   @Column({ type: 'varchar', unique: true, length: 11 })
   cpf: string;
 
-  @Column({ type: 'simple-array', default: [] })
-  // @OneToMany(() => CostumerEntity, (costumer) => costumer.managerId)
+  @Column({ type: 'simple-array', nullable: true })
+  @OneToMany(() => CostumerEntity, (costumer) => costumer.managerId)
   customers: string[];
 }

@@ -20,7 +20,7 @@ export class ManagerService implements IManagerService {
     private readonly customerService: ICostumerService,
     @Inject('IAccountService')
     private readonly accountService: IAccountService,
-    @Inject('ICostumerRepository')
+    @Inject('IManagerRepository')
     private readonly managerRepository: IManagerRepository,
   ) {}
 

@@ -1,5 +1,4 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { ICostumerService } from 'src/domain/interfaces/costumer.interface';
 import { IManagerService } from 'src/domain/interfaces/manager.interface';
 import { ManagerBaseDto, ManagerDto, OpenAccountDto } from '../dto/manager.dto';
 import { AccountDto } from '../dto/account.dto';

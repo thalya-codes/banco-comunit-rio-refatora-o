@@ -30,7 +30,7 @@ export class CostumerEntity {
 
   //add relação
   @Column({ type: 'varchar' })
-  // @ManyToOne(() => ManagerEntity, (manager) => manager.customers)
+  @ManyToOne(() => ManagerEntity, (manager) => manager.customers)
   managerId: string;
 
   @Column({ type: 'simple-array' })
