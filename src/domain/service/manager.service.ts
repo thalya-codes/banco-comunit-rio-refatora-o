@@ -32,8 +32,12 @@ export class ManagerService implements IManagerService {
     return await this.customerService.createCostumer(addCustomerDto);
   }
 
-  async findOneManager(id: string): Promise<CostumerDto> {
-    return await this.customerService.findCostumerById(id);
+  async findAllManagers(): Promise<ManagerDto[]> {
+    return await this.managerRepository.findAll();
+  }
+
+  async findOneManager(id: string): Promise<ManagerDto> {
+    return await this.managerRepository.findOne(id);
   }
 
   async openAccount(openAccountDto: CreateAccountDto): Promise<AccountDto> {
