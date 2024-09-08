@@ -38,7 +38,7 @@ export class CostumerEntity {
   @Column({ type: 'simple-array', nullable: true })
   @JoinColumn()
   @OneToMany(() => AccountEntity, (account) => account.customerId, {
-    // eager: true,
+    eager: true,
     onDelete: 'CASCADE',
   })
   accounts: AccountDto[];
