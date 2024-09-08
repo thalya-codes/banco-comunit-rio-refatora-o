@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { PixKeyType } from 'src/domain/enums/business.enum';
 import { IAccountService } from 'src/domain/interfaces/account.interface';
 import { IPixService } from 'src/domain/interfaces/pix.interface';
@@ -55,5 +63,10 @@ export class AccountController {
     @Body() changeAccountTypeDto: AlterAccountTypeDto,
   ): Promise<AccountDto> {
     return await this.managerServive.changeAccountType(changeAccountTypeDto);
+  }
+
+  @Delete(':id')
+  async deleteAccount(@Param() { id }: { id: string }) {
+    return await this.accountService.deleteAccount(id);
   }
 }

@@ -97,10 +97,7 @@ export class ManagerService implements IManagerService {
       }
     }
 
-    console.log(
-      'changeAccountTypeDto.newAccountType: ',
-      changeAccountTypeDto.type,
-    );
+  
     return await this.accountService.updateAccount(changeAccountTypeDto.id, {
       accountType: changeAccountTypeDto.type,
     });

@@ -28,7 +28,7 @@ export interface IAccountService {
   generateAccountNumber(): string;
   getAccount(getAccountDto: AccountNumberDto): Promise<AccountDto>;
   getAllAccounts(): Promise<AccountDto[]>;
-  deleteAccount(id: string): void;
+  deleteAccount(id: string): Promise<void>;
   updateAccount(
     id: string,
     updateAccountDto: Partial<CreateAccountDto>,

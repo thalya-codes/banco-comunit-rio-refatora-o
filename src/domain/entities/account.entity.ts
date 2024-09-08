@@ -22,6 +22,7 @@ export class AccountEntity {
   @ManyToOne(() => CostumerEntity, (costumer) => costumer.accounts, {
     nullable: false,
     onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   customerId: string;
 

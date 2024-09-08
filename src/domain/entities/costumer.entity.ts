@@ -31,6 +31,7 @@ export class CostumerEntity {
   @OneToMany(() => AccountEntity, (account) => account.customerId, {
     eager: true,
     onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
     cascade: true,
   })
   accounts: AccountDto[];
