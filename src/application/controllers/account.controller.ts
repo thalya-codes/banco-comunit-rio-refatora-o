@@ -1,8 +1,12 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { PixKeyType } from 'src/domain/enums/business.enum';
 import { IAccountService } from 'src/domain/interfaces/account.interface';
 import { IPixService } from 'src/domain/interfaces/pix.interface';
-import { CreateAccountDto } from '../dto/account.dto';
+import {
+  AccountDto,
+  AccountNumberDto,
+  CreateAccountDto,
+} from '../dto/account.dto';
 import { IManagerService } from 'src/domain/interfaces/manager.interface';
 import { OpenAccountDto } from '../dto/manager.dto';
 
@@ -27,6 +31,18 @@ export class AccountController {
     @Body() openAccountDto: OpenAccountDto,
   ): Promise<{ accountNumber: string }> {
     return await this.managerServive.openAccount(openAccountDto);
+  }
+
+  @Get()
+  async getAllAccounts(): Promise<AccountDto[]> {
+    return await this.accountService.getAllAccounts();
+  }
+
+  @Get(':accountNumber')
+  async getAccount(
+    @Param() accountNumber: AccountNumberDto,
+  ): Promise<AccountDto> {
+    return await this.accountService.getAccount(accountNumber);
   }
 
   @Post('pix/create-key')

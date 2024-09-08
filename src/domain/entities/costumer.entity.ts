@@ -30,13 +30,15 @@ export class CostumerEntity {
   telephone: string;
 
   //add relação
-  @OneToOne(() => ManagerEntity, (manager) => manager.customers)
+  @Column({ type: 'varchar', nullable: true })
+  @ManyToOne(() => ManagerEntity, (manager) => manager.customers)
   @JoinColumn()
   managerId: string;
 
   @Column({ type: 'simple-array', nullable: true })
   @JoinColumn()
   @OneToMany(() => AccountEntity, (account) => account.customerId, {
+    // eager: true,
     onDelete: 'CASCADE',
   })
   accounts: AccountDto[];

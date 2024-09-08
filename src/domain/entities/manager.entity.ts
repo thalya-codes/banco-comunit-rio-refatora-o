@@ -19,9 +19,6 @@ export class ManagerEntity {
   cpf: string;
 
   @Column({ type: 'simple-array', nullable: true })
-  @OneToMany(() => CostumerEntity, (costumer) => costumer.managerId, {
-    eager: true,
-    cascade: true,
-  })
+  @OneToMany(() => CostumerEntity, (costumer) => costumer.managerId)
   customers: string[];
 }
