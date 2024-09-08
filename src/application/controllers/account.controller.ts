@@ -2,11 +2,7 @@ import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { PixKeyType } from 'src/domain/enums/business.enum';
 import { IAccountService } from 'src/domain/interfaces/account.interface';
 import { IPixService } from 'src/domain/interfaces/pix.interface';
-import {
-  AccountDto,
-  AccountNumberDto,
-  CreateAccountDto,
-} from '../dto/account.dto';
+import { AccountDto, AccountNumberDto } from '../dto/account.dto';
 import { IManagerService } from 'src/domain/interfaces/manager.interface';
 import { OpenAccountDto } from '../dto/manager.dto';
 

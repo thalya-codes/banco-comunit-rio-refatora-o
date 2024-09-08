@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IAccountRepository } from '../interfaces/account.interface';
 import { CreatePixKeyDto, ProcessPixDto } from 'src/application/dto/pix.dto';
 import { PixKeyType } from '../enums/business.enum';
-import { v3 as uuidv3 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { ErrorMessages } from '../enums/error-messages.enum';
 import { IPixService } from '../interfaces/pix.interface';
 import { AccountDto } from 'src/application/dto/account.dto';
@@ -20,9 +20,10 @@ export class PixService implements IPixService {
     });
 
     if (createPixKeyDto.key_type === PixKeyType.RANDOM) {
-      const randomKey: string = uuidv3() as unknown as string;
-      const keys = account.pix_keys as Array<string>;
+      const randomKey: string = uuidv4() as unknown as string;
+      const keys = account.pix_keys || ([] as unknown as any);
       keys.push(randomKey);
+
       return await this.accountRepository.save(account);
     }
   }
