@@ -22,9 +22,10 @@ export class PixService implements IPixService {
     if (createPixKeyDto.key_type === PixKeyType.RANDOM) {
       const randomKey: string = uuidv4() as unknown as string;
       const keys = account.pix_keys || ([] as unknown as any);
-      keys.push(randomKey);
 
-      return await this.accountRepository.save(account);
+      return await this.accountRepository.update(account.id, {
+        pix_keys: [...keys, randomKey],
+      });
     }
   }
 
