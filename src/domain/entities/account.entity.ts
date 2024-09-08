@@ -2,13 +2,10 @@ import {
   Check,
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CostumerEntity } from './costumer.entity';
-import { CostumerDto } from 'src/application/dto/costumer.dto';
 
 @Entity()
 @Check('"accountType" = 0 OR "accountType" = 1')
