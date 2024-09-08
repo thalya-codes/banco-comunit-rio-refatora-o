@@ -22,8 +22,6 @@ export class AccountEntity {
   @Column({ type: 'int' })
   accountType: number;
 
-  @Column({ type: 'varchar' })
-  @JoinColumn()
   @ManyToOne(() => CostumerEntity, (costumer) => costumer.accounts)
   customerId: string;
 
