@@ -10,7 +10,7 @@ import { CostumerEntity } from './costumer.entity';
 @Entity()
 @Check('"accountType" = 0 OR "accountType" = 1')
 export class AccountEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ type: 'float' })
@@ -19,7 +19,10 @@ export class AccountEntity {
   @Column({ type: 'int' })
   accountType: number;
 
-  @ManyToOne(() => CostumerEntity, (costumer) => costumer.accounts)
+  @ManyToOne(() => CostumerEntity, (costumer) => costumer.accounts, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
   customerId: string;
 
   @Column({ type: 'varchar', unique: true, length: 13 })

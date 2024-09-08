@@ -75,7 +75,7 @@ export class AlterAccountTypeDto {
 
   @IsNotEmpty()
   @IsNumber()
-  newAccountType: number;
+  type: AccountType;
 }
 
 export class CreateAccountDto {

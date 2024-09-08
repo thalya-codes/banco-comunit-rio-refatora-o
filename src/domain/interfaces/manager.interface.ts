@@ -1,4 +1,7 @@
-import { AccountDto } from 'src/application/dto/account.dto';
+import {
+  AccountDto,
+  AlterAccountTypeDto,
+} from 'src/application/dto/account.dto';
 import {
   CostumerDto,
   CreateCostumerDto,
@@ -34,6 +37,9 @@ export interface IManagerService {
   addCustomer(customerDto: CreateCostumerDto): Promise<CostumerDto>;
   removeCustomer(id: string): Promise<void>;
   openAccount(openAccountDto: OpenAccountDto): Promise<AccountDto>; //
+  changeAccountType(
+    changeAccountTypeDto: AlterAccountTypeDto,
+  ): Promise<AccountDto>;
   // closeAccount(closeAccountDto: CloseAccountDto): void;
   // alterAccountType(
   //   client: ManagerDto,

@@ -2,7 +2,11 @@ import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { PixKeyType } from 'src/domain/enums/business.enum';
 import { IAccountService } from 'src/domain/interfaces/account.interface';
 import { IPixService } from 'src/domain/interfaces/pix.interface';
-import { AccountDto, AccountNumberDto } from '../dto/account.dto';
+import {
+  AccountDto,
+  AccountNumberDto,
+  AlterAccountTypeDto,
+} from '../dto/account.dto';
 import { IManagerService } from 'src/domain/interfaces/manager.interface';
 import { OpenAccountDto } from '../dto/manager.dto';
 
@@ -44,5 +48,12 @@ export class AccountController {
   @Post('pix/create-key')
   async createPixKey(@Body() createPixKeyDto: createPixDto) {
     return await this.pixService.createKey(createPixKeyDto);
+  }
+
+  @Post('change-type')
+  async changeAccountType(
+    @Body() changeAccountTypeDto: AlterAccountTypeDto,
+  ): Promise<AccountDto> {
+    return await this.managerServive.changeAccountType(changeAccountTypeDto);
   }
 }

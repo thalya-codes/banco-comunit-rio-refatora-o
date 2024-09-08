@@ -95,7 +95,7 @@ export class AccountService implements IAccountService {
   ): Promise<AccountDto> {
     try {
       return await this.accountRepository.update(alterAccountTypeDto.id, {
-        accountType: alterAccountTypeDto.newAccountType,
+        accountType: alterAccountTypeDto.type,
       });
     } catch (error) {
       console.log(error);
