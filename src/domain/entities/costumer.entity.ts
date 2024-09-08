@@ -5,6 +5,7 @@ import {
   // ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   // JoinColumn,
   // ManyToOne,
   PrimaryGeneratedColumn,
@@ -29,13 +30,13 @@ export class CostumerEntity {
   telephone: string;
 
   //add relação
-  @Column({ type: 'varchar' })
-  @ManyToOne(() => ManagerEntity, (manager) => manager.customers)
+  @OneToOne(() => ManagerEntity, (manager) => manager.customers)
+  @JoinColumn()
   managerId: string;
 
   @Column({ type: 'simple-array', nullable: true })
   @JoinColumn()
-  @ManyToOne(() => AccountEntity, (account) => account.customersId, {
+  @OneToMany(() => AccountEntity, (account) => account.customerId, {
     onDelete: 'CASCADE',
   })
   accounts: AccountDto[];

@@ -54,7 +54,7 @@ export class AccountDto {
   balance: number;
 
   @IsNotEmpty()
-  customersId: string[];
+  customerId: string;
 
   @IsNotEmpty()
   @IsString()

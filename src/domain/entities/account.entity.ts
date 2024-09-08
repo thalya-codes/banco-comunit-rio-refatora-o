@@ -3,6 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -21,10 +22,10 @@ export class AccountEntity {
   @Column({ type: 'int' })
   accountType: number;
 
-  @Column({ type: 'simple-array' })
+  @Column({ type: 'varchar' })
   @JoinColumn()
-  @OneToMany(() => CostumerEntity, (costumer) => costumer.accounts)
-  customersId: string[];
+  @ManyToOne(() => CostumerEntity, (costumer) => costumer.accounts)
+  customerId: string;
 
   @Column({ type: 'varchar', unique: true, length: 13 })
   accountNumber: string;

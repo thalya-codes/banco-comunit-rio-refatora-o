@@ -3,26 +3,30 @@ import { PixKeyType } from 'src/domain/enums/business.enum';
 import { IAccountService } from 'src/domain/interfaces/account.interface';
 import { IPixService } from 'src/domain/interfaces/pix.interface';
 import { CreateAccountDto } from '../dto/account.dto';
+import { IManagerService } from 'src/domain/interfaces/manager.interface';
+import { OpenAccountDto } from '../dto/manager.dto';
 
 interface createPixDto {
   accountNumber: string;
   key_type: PixKeyType;
 }
 
-@Controller()
+@Controller('account')
 export class AccountController {
   constructor(
     @Inject('IAccountService')
     private readonly accountService: IAccountService,
     @Inject('IPixService')
     private readonly pixService: IPixService,
+    @Inject('IManagerService')
+    private readonly managerServive: IManagerService,
   ) {}
 
   @Post('create')
   async createAccount(
-    @Body() createAccountDto: CreateAccountDto,
+    @Body() openAccountDto: OpenAccountDto,
   ): Promise<{ accountNumber: string }> {
-    return await this.accountService.createAccount(createAccountDto);
+    return await this.managerServive.openAccount(openAccountDto);
   }
 
   @Post('pix/create-key')
