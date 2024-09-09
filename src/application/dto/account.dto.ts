@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { AccountType } from 'src/domain/enums/business.enum';
 
 export class AccountNumberDto {
@@ -34,10 +34,6 @@ export class TransactionDto {
   @IsNotEmpty()
   @IsNumber()
   amount: number;
-
-  @IsNotEmpty()
-  @IsString()
-  originAccountNumber: string;
 
   @IsNotEmpty()
   @IsString()

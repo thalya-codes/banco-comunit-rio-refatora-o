@@ -10,6 +10,7 @@ import {
   UpdateAccountDto,
   WithdrawDto,
 } from 'src/application/dto/account.dto';
+import { TransferReceiptDto } from 'src/application/dto/transfer-receipt.dto';
 
 export interface IAccountRepository {
   create(
@@ -38,7 +39,7 @@ export interface IAccountService {
   ): Promise<AccountDto>;
   createAccount(createAccountDto: CreateAccountDto): Promise<AccountDto>;
 
-  deposit(depositDto: TransactionDto): void;
+  deposit(depositDto: TransactionDto): Promise<void>;
   withdraw(withdrawDto: WithdrawDto): Promise<{ balance: number }>;
   // transfer(transferDto: TransactionDto): Promise<{ balance: number }>;
   consultBalance(id: string): Promise<{ balance: number }>;

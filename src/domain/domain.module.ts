@@ -8,6 +8,7 @@ import { PixService } from './service/pix.service';
 import { ManagerEntity } from './entities/manager.entity';
 import { ManagerService } from './service/manager.service';
 import { AccountService } from './service/account.service';
+import { TransferReceiptService } from './service/transfer.receipt.service';
 
 @Module({
   imports: [
@@ -31,12 +32,17 @@ import { AccountService } from './service/account.service';
       provide: 'IAccountService',
       useClass: AccountService,
     },
+    {
+      provide: 'ITransferReceiptService',
+      useClass: TransferReceiptService,
+    },
   ],
   exports: [
     'ICostumerService',
     'IPixService',
     'IManagerService',
     'IAccountService',
+    'ITransferReceiptService',
   ],
 })
 export class DomainModule {}

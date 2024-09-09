@@ -14,6 +14,8 @@ import {
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from '../enums/error-messages.enum';
 import { v4 as uuidv4 } from 'uuid';
+import { ITransferReceiptService } from '../interfaces/transfer.receipt.interface';
+import { TransferReceiptDto } from 'src/application/dto/transfer-receipt.dto';
 // import { PaymentFactory } from '../factories/payment.factory';
 // import { PixPayment } from '../models/payment/pix.payment.model';
 
@@ -24,6 +26,8 @@ export class AccountService implements IAccountService {
   constructor(
     @Inject('IAccountRepository')
     private readonly accountRepository: IAccountRepository,
+    @Inject('ITransferReceiptService')
+    private readonly transferReceiptService: ITransferReceiptService,
   ) {}
 
   //[x] generate account number
@@ -148,25 +152,13 @@ export class AccountService implements IAccountService {
 
   async deposit(transactionDto: TransactionDto) {
     try {
-      const originAccount = await this.getAccount({
-        accountNumber: transactionDto.originAccountNumber,
-      });
-
       const destinationAccount = await this.getAccount({
         accountNumber: transactionDto.destinationAccountNumber,
-      });
-
-      if (originAccount.balance < transactionDto.amount)
-        throw new Error(ErrorMessages.INSUFICIENT_BALANCE);
-
-      await this.accountRepository.update(originAccount.id, {
-        balance: originAccount.balance - transactionDto.amount,
       });
 
       await this.accountRepository.update(destinationAccount.id, {
         balance: destinationAccount.balance + transactionDto.amount,
       });
-      //todo retornar comprovante de deposito
     } catch (error) {
       console.log(error);
     }
@@ -182,6 +174,8 @@ export class AccountService implements IAccountService {
       console.log(error);
     }
   }
+
+  async transferByBankSlip() {}
 
   //TODO: Implementar após criar a classe de pagamento
   //Tipos de pagamento

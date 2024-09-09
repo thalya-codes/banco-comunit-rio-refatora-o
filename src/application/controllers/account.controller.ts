@@ -14,9 +14,13 @@ import {
   AccountDto,
   AccountNumberDto,
   AlterAccountTypeDto,
+  TransactionDto,
 } from '../dto/account.dto';
 import { IManagerService } from 'src/domain/interfaces/manager.interface';
 import { OpenAccountDto } from '../dto/manager.dto';
+import { ITransferReceiptService } from 'src/domain/interfaces/transfer.receipt.interface';
+import { ProcessPixDto } from '../dto/pix.dto';
+import { Transaction } from 'typeorm';
 
 interface createPixDto {
   accountNumber: string;
@@ -32,6 +36,8 @@ export class AccountController {
     private readonly pixService: IPixService,
     @Inject('IManagerService')
     private readonly managerServive: IManagerService,
+    @Inject('ITransferReceiptService')
+    private readonly transferReceiptService: ITransferReceiptService,
   ) {}
 
   @Post('create')
@@ -58,6 +64,11 @@ export class AccountController {
     return await this.pixService.createKey(createPixKeyDto);
   }
 
+  @Post('deposit')
+  async deposit(@Body() transactionDto: TransactionDto) {
+    return await this.accountService.deposit(transactionDto);
+  }
+
   @Post('change-type')
   async changeAccountType(
     @Body() changeAccountTypeDto: AlterAccountTypeDto,
@@ -68,5 +79,10 @@ export class AccountController {
   @Delete(':id')
   async deleteAccount(@Param() { id }: { id: string }) {
     return await this.accountService.deleteAccount(id);
+  }
+
+  @Post('transfer/pix')
+  async transferByPix(processPixDto: ProcessPixDto) {
+    return await this.pixService.processPix(processPixDto);
   }
 }
