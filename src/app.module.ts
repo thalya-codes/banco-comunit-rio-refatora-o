@@ -10,6 +10,7 @@ import { CostumerEntity } from './domain/entities/costumer.entity';
 import { AccountService } from './domain/service/account.service';
 import { AccountEntity } from './domain/entities/account.entity';
 import { ManagerEntity } from './domain/entities/manager.entity';
+import { TransferReceiptEntity } from './domain/entities/transfer.entity';
 
 @Module({
   imports: [
@@ -23,7 +24,12 @@ import { ManagerEntity } from './domain/entities/manager.entity';
       password: process.env.DB_PASSWORD,
       port: +process.env.DB_PORT,
       username: process.env.DB_USERNAME,
-      entities: [CostumerEntity, AccountEntity, ManagerEntity],
+      entities: [
+        CostumerEntity,
+        AccountEntity,
+        ManagerEntity,
+        TransferReceiptEntity,
+      ],
       synchronize: true,
     }),
     ApplicationModule,

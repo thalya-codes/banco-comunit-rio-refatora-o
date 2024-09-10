@@ -58,6 +58,8 @@ export class PixService implements IPixService {
         recipientId: destinationAccount.id,
         amount: processPixDto.amount,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.error({ error });
+    }
   }
 }

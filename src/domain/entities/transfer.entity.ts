@@ -5,17 +5,17 @@ import {
   CreateDateColumn,
   ManyToOne,
 } from 'typeorm';
-import { CostumerEntity } from './costumer.entity';
+import { AccountEntity } from './account.entity';
 
 @Entity()
 export class TransferReceiptEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => CostumerEntity, { eager: true })
+  @ManyToOne(() => AccountEntity, (account) => account.senderedReceipts)
   senderId: string;
 
-  @ManyToOne(() => CostumerEntity, { eager: true })
+  @ManyToOne(() => AccountEntity, (account) => account.receivedReceipts)
   recipientId: string;
 
   @Column('decimal', { precision: 10, scale: 2 })

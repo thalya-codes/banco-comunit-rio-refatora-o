@@ -20,7 +20,6 @@ import { IManagerService } from 'src/domain/interfaces/manager.interface';
 import { OpenAccountDto } from '../dto/manager.dto';
 import { ITransferReceiptService } from 'src/domain/interfaces/transfer.receipt.interface';
 import { ProcessPixDto } from '../dto/pix.dto';
-import { Transaction } from 'typeorm';
 
 interface createPixDto {
   accountNumber: string;
@@ -82,7 +81,8 @@ export class AccountController {
   }
 
   @Post('transfer/pix')
-  async transferByPix(processPixDto: ProcessPixDto) {
+  async transferByPix(@Body() processPixDto: ProcessPixDto) {
+
     return await this.pixService.processPix(processPixDto);
   }
 }

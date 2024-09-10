@@ -9,10 +9,16 @@ import { ManagerEntity } from './entities/manager.entity';
 import { ManagerService } from './service/manager.service';
 import { AccountService } from './service/account.service';
 import { TransferReceiptService } from './service/transfer.receipt.service';
+import { TransferReceiptEntity } from './entities/transfer.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([CostumerEntity, AccountEntity, ManagerEntity]),
+    TypeOrmModule.forFeature([
+      CostumerEntity,
+      AccountEntity,
+      ManagerEntity,
+      TransferReceiptEntity,
+    ]),
     InfrastructureModule,
   ],
   providers: [

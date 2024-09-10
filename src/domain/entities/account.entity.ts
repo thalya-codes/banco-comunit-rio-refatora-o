@@ -3,9 +3,12 @@ import {
   Column,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CostumerEntity } from './costumer.entity';
+import { TransferReceiptDto } from 'src/application/dto/transfer-receipt.dto';
+import { TransferReceiptEntity } from './transfer.entity';
 
 @Entity()
 @Check('"accountType" = 0 OR "accountType" = 1')
@@ -31,4 +34,14 @@ export class AccountEntity {
 
   @Column({ type: 'simple-array', unique: true, nullable: true })
   pix_keys: string[] | number[];
+
+  @OneToMany(() => TransferReceiptEntity, (transfer) => transfer.recipientId, {
+    eager: true,
+  })
+  receivedReceipts: TransferReceiptDto[];
+
+  @OneToMany(() => TransferReceiptEntity, (transfer) => transfer.senderId, {
+    eager: true,
+  })
+  senderedReceipts: TransferReceiptDto[];
 }
