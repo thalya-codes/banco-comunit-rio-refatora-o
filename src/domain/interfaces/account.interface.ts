@@ -7,6 +7,7 @@ import {
   IdDto,
   PixKeyDto,
   TransactionDto,
+  TransferDto,
   UpdateAccountDto,
   WithdrawDto,
 } from 'src/application/dto/account.dto';
@@ -41,7 +42,7 @@ export interface IAccountService {
 
   deposit(depositDto: TransactionDto): Promise<void>;
   withdraw(withdrawDto: WithdrawDto): Promise<{ balance: number }>;
-  // transfer(transferDto: TransactionDto): Promise<{ balance: number }>;
+  transfer(transferDto: TransferDto): Promise<TransferReceiptDto>;
   consultBalance(id: string): Promise<{ balance: number }>;
   getAccount(id: IdDto | AccountNumberDto): Promise<AccountDto>;
 }

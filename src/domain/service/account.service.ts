@@ -10,6 +10,7 @@ import {
   CreateAccountDto,
   IdDto,
   TransactionDto,
+  TransferDto,
   WithdrawDto,
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from '../enums/error-messages.enum';
@@ -122,12 +123,39 @@ export class AccountService implements IAccountService {
 
       return { balance: updatedAccount.balance };
     } catch (error) {
-      return error;
+      console.error({ error });
     }
   }
 
-  //destinationQuerySearchParam
-  //
+  async transfer(transferDto: TransferDto): Promise<TransferReceiptDto> {
+    const originAccount = await this.accountRepository.findOne({
+      id: transferDto.originAccountId,
+    });
+
+    const destinationAccount = await this.accountRepository.findOne(
+      transferDto.destinationAccountQuery,
+    );
+
+    if (originAccount.balance < transferDto.amount)
+      throw new Error(ErrorMessages.INSUFICIENT_BALANCE);
+
+    try {
+      await this.accountRepository.update(originAccount.id, {
+        balance: originAccount.balance - transferDto.amount,
+      });
+      await this.accountRepository.update(destinationAccount.id, {
+        balance: destinationAccount.balance + transferDto.amount,
+      });
+
+      return await this.transferReceiptService.createReceipt({
+        senderId: originAccount.id,
+        recipientId: destinationAccount.id,
+        amount: transferDto.amount,
+      });
+    } catch (error) {
+      console.error({ error });
+    }
+  }
 
   /*
     Pagamento por boleto
@@ -174,8 +202,6 @@ export class AccountService implements IAccountService {
       console.log(error);
     }
   }
-
-  async transferByBankSlip() {}
 
   //TODO: Implementar após criar a classe de pagamento
   //Tipos de pagamento

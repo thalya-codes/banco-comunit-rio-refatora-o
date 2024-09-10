@@ -1,5 +1,6 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { AccountType } from 'src/domain/enums/business.enum';
+import { TDestinationAccountQuery } from 'src/domain/types/shared.type';
 
 export class AccountNumberDto {
   @IsNotEmpty()
@@ -101,3 +102,17 @@ export class CreateAccountRepositoryDto extends CreateAccountDto {
 export type UpdateAccountDto = Partial<
   Omit<AccountDto, 'id' | 'accountNumber'>
 >;
+
+export class TransferDto {
+  @IsNotEmpty()
+  @IsString()
+  originAccountId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  destinationAccountQuery: TDestinationAccountQuery;
+
+  @IsNotEmpty()
+  @IsNumber()
+  amount: number;
+}
