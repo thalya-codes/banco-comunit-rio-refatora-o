@@ -7,7 +7,7 @@ import { ErrorMessages } from '../enums/error-messages.enum';
 import { IPixService } from '../interfaces/pix.interface';
 import { AccountDto } from 'src/application/dto/account.dto';
 import { ITransferReceiptService } from '../interfaces/transfer.receipt.interface';
-import { TransferReceiptDto } from 'src/application/dto/transfer-receipt.dto';
+import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
 
 @Injectable()
 export class PixService implements IPixService {

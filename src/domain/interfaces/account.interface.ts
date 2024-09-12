@@ -11,7 +11,7 @@ import {
   UpdateAccountDto,
   WithdrawDto,
 } from 'src/application/dto/account.dto';
-import { TransferReceiptDto } from 'src/application/dto/transfer-receipt.dto';
+import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
 
 export interface IAccountRepository {
   create(

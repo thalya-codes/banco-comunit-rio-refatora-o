@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsDecimal, IsUUID, IsDate } from 'class-validator';
+import { IsNotEmpty, IsDecimal, IsUUID } from 'class-validator';
 
 export class TransferReceiptBaseDto {
   @IsNotEmpty()

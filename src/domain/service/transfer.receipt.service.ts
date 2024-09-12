@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import {
   TransferReceiptBaseDto,
   TransferReceiptDto,
-} from 'src/application/dto/transfer-receipt.dto';
+} from 'src/application/dto/transfer.receipt.dto';
 import {
   ITransferReceiptRepository,
   ITransferReceiptService,

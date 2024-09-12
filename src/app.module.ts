@@ -10,7 +10,7 @@ import { CostumerEntity } from './domain/entities/costumer.entity';
 import { AccountService } from './domain/service/account.service';
 import { AccountEntity } from './domain/entities/account.entity';
 import { ManagerEntity } from './domain/entities/manager.entity';
-import { TransferReceiptEntity } from './domain/entities/transfer.entity';
+import { PixTransferReceiptEntity } from './domain/entities/pix.transfer.receipt.entity';
 
 @Module({
   imports: [
@@ -28,7 +28,7 @@ import { TransferReceiptEntity } from './domain/entities/transfer.entity';
         CostumerEntity,
         AccountEntity,
         ManagerEntity,
-        TransferReceiptEntity,
+        PixTransferReceiptEntity,
       ],
       synchronize: true,
     }),

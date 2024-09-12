@@ -7,7 +7,7 @@ import { AccountEntity } from 'src/domain/entities/account.entity';
 import { ManagerEntity } from 'src/domain/entities/manager.entity';
 import { ManagerRepository } from './repositories/manager.repository';
 import { TransferReceiptRepository } from './repositories/transfer.receipt.repository';
-import { TransferReceiptEntity } from 'src/domain/entities/transfer.entity';
+import { PixTransferReceiptEntity } from 'src/domain/entities/pix.transfer.receipt.entity';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { TransferReceiptEntity } from 'src/domain/entities/transfer.entity';
       AccountEntity,
       CostumerEntity,
       ManagerEntity,
-      TransferReceiptEntity,
+      PixTransferReceiptEntity,
     ]),
   ],
   providers: [

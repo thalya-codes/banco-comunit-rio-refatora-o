@@ -16,7 +16,7 @@ import {
 import { ErrorMessages } from '../enums/error-messages.enum';
 import { v4 as uuidv4 } from 'uuid';
 import { ITransferReceiptService } from '../interfaces/transfer.receipt.interface';
-import { TransferReceiptDto } from 'src/application/dto/transfer-receipt.dto';
+import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
 // import { PaymentFactory } from '../factories/payment.factory';
 // import { PixPayment } from '../models/payment/pix.payment.model';
 

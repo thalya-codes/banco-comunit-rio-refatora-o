@@ -8,7 +8,7 @@ import {
 import { AccountEntity } from './account.entity';
 
 @Entity()
-export class TransferReceiptEntity {
+export class PixTransferReceiptEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

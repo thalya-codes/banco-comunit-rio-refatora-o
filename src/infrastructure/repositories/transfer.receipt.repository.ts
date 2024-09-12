@@ -2,17 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ITransferReceiptRepository } from 'src/domain/interfaces/transfer.receipt.interface';
-import { TransferReceiptEntity } from 'src/domain/entities/transfer.entity';
+import { PixTransferReceiptEntity } from 'src/domain/entities/pix.transfer.receipt.entity';
 import {
   TransferReceiptBaseDto,
   TransferReceiptDto,
-} from 'src/application/dto/transfer-receipt.dto';
+} from 'src/application/dto/transfer.receipt.dto';
 
 @Injectable()
 export class TransferReceiptRepository implements ITransferReceiptRepository {
   constructor(
-    @InjectRepository(TransferReceiptEntity)
-    private readonly transferReceiptRepository: Repository<TransferReceiptEntity>,
+    @InjectRepository(PixTransferReceiptEntity)
+    private readonly transferReceiptRepository: Repository<PixTransferReceiptEntity>,
   ) {}
 
   async create(

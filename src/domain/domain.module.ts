@@ -9,7 +9,7 @@ import { ManagerEntity } from './entities/manager.entity';
 import { ManagerService } from './service/manager.service';
 import { AccountService } from './service/account.service';
 import { TransferReceiptService } from './service/transfer.receipt.service';
-import { TransferReceiptEntity } from './entities/transfer.entity';
+import { PixTransferReceiptEntity } from './entities/pix.transfer.receipt.entity';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { TransferReceiptEntity } from './entities/transfer.entity';
       CostumerEntity,
       AccountEntity,
       ManagerEntity,
-      TransferReceiptEntity,
+      PixTransferReceiptEntity,
     ]),
     InfrastructureModule,
   ],

@@ -1,4 +1,5 @@
 import {
+  IsDate,
   IsNotEmpty,
   IsNumber,
   IsObject,
@@ -27,4 +28,26 @@ export class ProcessBankSlipDto {
   @IsString()
   @IsNotEmpty()
   payCode: string;
+}
+
+export class GenerateBankSplipDto {
+  @IsNotEmpty()
+  @IsString()
+  destinationAccount: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  amount: number;
+
+  @IsNotEmpty()
+  @IsDate()
+  dueDate: Date;
+
+  @IsNotEmpty()
+  @IsString()
+  payerId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  payeeId: string;
 }

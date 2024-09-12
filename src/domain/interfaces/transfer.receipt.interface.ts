@@ -1,7 +1,7 @@
 import {
   TransferReceiptBaseDto,
   TransferReceiptDto,
-} from 'src/application/dto/transfer-receipt.dto';
+} from 'src/application/dto/transfer.receipt.dto';
 
 export interface ITransferReceiptRepository {
   create(

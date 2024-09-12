@@ -7,8 +7,9 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CostumerEntity } from './costumer.entity';
-import { TransferReceiptDto } from 'src/application/dto/transfer-receipt.dto';
-import { TransferReceiptEntity } from './transfer.entity';
+import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
+import { PixTransferReceiptEntity } from './pix.transfer.receipt.entity';
+import { BankSlipTransferReceiptDto } from 'src/application/dto/bank.splip.entity.dto';
 
 @Entity()
 @Check('"accountType" = 0 OR "accountType" = 1')
@@ -35,13 +36,21 @@ export class AccountEntity {
   @Column({ type: 'simple-array', unique: true, nullable: true })
   pix_keys: string[] | number[];
 
-  @OneToMany(() => TransferReceiptEntity, (transfer) => transfer.recipientId, {
-    eager: true,
-  })
-  receivedReceipts: TransferReceiptDto[];
+  @OneToMany(
+    () => PixTransferReceiptEntity || BankSlipTransferReceiptDto,
+    (transfer) => transfer.recipientId,
+    {
+      eager: true,
+    },
+  )
+  receivedReceipts: TransferReceiptDto[] | BankSlipTransferReceiptDto[];
 
-  @OneToMany(() => TransferReceiptEntity, (transfer) => transfer.senderId, {
-    eager: true,
-  })
-  senderedReceipts: TransferReceiptDto[];
+  @OneToMany(
+    () => PixTransferReceiptEntity || BankSlipTransferReceiptDto,
+    (transfer) => transfer.senderId,
+    {
+      eager: true,
+    },
+  )
+  senderedReceipts: TransferReceiptDto[] | BankSlipTransferReceiptDto[];
 }
