@@ -8,6 +8,8 @@ import { ManagerEntity } from 'src/domain/entities/manager.entity';
 import { ManagerRepository } from './repositories/manager.repository';
 import { TransferReceiptRepository } from './repositories/transfer.receipt.repository';
 import { PixTransferReceiptEntity } from 'src/domain/entities/pix.transfer.receipt.entity';
+import { BankSlipTransferReceiptRepository } from './repositories/bank.slip.transfer.receipt.repository';
+import { BankSlipTransferReceiptEntity } from 'src/domain/entities/bank.splip.entity';
 
 @Module({
   imports: [
@@ -16,6 +18,7 @@ import { PixTransferReceiptEntity } from 'src/domain/entities/pix.transfer.recei
       CostumerEntity,
       ManagerEntity,
       PixTransferReceiptEntity,
+      BankSlipTransferReceiptEntity,
     ]),
   ],
   providers: [
@@ -35,12 +38,17 @@ import { PixTransferReceiptEntity } from 'src/domain/entities/pix.transfer.recei
       provide: 'ITransferReceiptRepository',
       useClass: TransferReceiptRepository,
     },
+    {
+      provide: 'IBankSlipTransferReceiptRepository',
+      useClass: BankSlipTransferReceiptRepository,
+    },
   ],
   exports: [
     'ICostumerRepository',
     'IAccountRepository',
     'IManagerRepository',
     'ITransferReceiptRepository',
+    'IBankSlipTransferReceiptRepository',
   ],
 })
 export class InfrastructureModule {}

@@ -1,3 +1,4 @@
+import { BankSlipTransferReceiptDto } from 'src/application/dto/bank.splip.transfer.receipt.dto';
 import {
   TransferReceiptBaseDto,
   TransferReceiptDto,
@@ -15,8 +16,13 @@ export interface ITransferReceiptRepository {
 
 export interface ITransferReceiptService {
   createReceipt(
-    createTransferDto: Omit<TransferReceiptBaseDto, 'transferDate'>,
-  ): Promise<TransferReceiptDto>;
+    createTransferDto: Omit<
+      TransferReceiptBaseDto | BankSlipTransferReceiptDto,
+      'transferDate'
+    >,
+  ): Promise<TransferReceiptDto | BankSlipTransferReceiptDto>;
 
-  getReceiptById(id: string): Promise<TransferReceiptDto>;
+  getReceiptById(
+    id: string,
+  ): Promise<TransferReceiptDto | BankSlipTransferReceiptDto>;
 }

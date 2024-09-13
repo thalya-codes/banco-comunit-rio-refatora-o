@@ -8,9 +8,14 @@ import {
   PixKeyDto,
   TransactionDto,
   TransferDto,
+  TransferReturnDto,
   UpdateAccountDto,
   WithdrawDto,
 } from 'src/application/dto/account.dto';
+import {
+  BankSlipTransferReceiptBaseDto,
+  BankSlipTransferReceiptDto,
+} from 'src/application/dto/bank.splip.transfer.receipt.dto';
 import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
 
 export interface IAccountRepository {
@@ -42,7 +47,7 @@ export interface IAccountService {
 
   deposit(depositDto: TransactionDto): Promise<void>;
   withdraw(withdrawDto: WithdrawDto): Promise<{ balance: number }>;
-  transfer(transferDto: TransferDto): Promise<TransferReceiptDto>;
+  transfer(transferDto: TransferDto): Promise<TransferReturnDto>;
   consultBalance(id: string): Promise<{ balance: number }>;
   getAccount(id: IdDto | AccountNumberDto): Promise<AccountDto>;
 }

@@ -11,6 +11,7 @@ import {
   IdDto,
   TransactionDto,
   TransferDto,
+  TransferReturnDto,
   WithdrawDto,
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from '../enums/error-messages.enum';
@@ -127,7 +128,7 @@ export class AccountService implements IAccountService {
     }
   }
 
-  async transfer(transferDto: TransferDto): Promise<TransferReceiptDto> {
+  async transfer(transferDto: TransferDto): Promise<TransferReturnDto> {
     const originAccount = await this.accountRepository.findOne({
       id: transferDto.originAccountId,
     });
@@ -147,11 +148,11 @@ export class AccountService implements IAccountService {
         balance: destinationAccount.balance + transferDto.amount,
       });
 
-      return await this.transferReceiptService.createReceipt({
+      return {
         senderId: originAccount.id,
         recipientId: destinationAccount.id,
-        amount: transferDto.amount,
-      });
+        transferDate: new Date().toISOString(),
+      };
     } catch (error) {
       console.error({ error });
     }

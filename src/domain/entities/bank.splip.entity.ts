@@ -28,7 +28,7 @@ export class BankSlipTransferReceiptEntity {
   amountWithInterest: number;
 
   @Column('date')
-  dueDate: Date;
+  dueDate: string;
 
   @Column('varchar', { length: 255 })
   bankSlipNumber: string;
@@ -37,5 +37,5 @@ export class BankSlipTransferReceiptEntity {
   barcode: string;
 
   @CreateDateColumn()
-  paymentDate: Date;
+  transferDate: Date;
 }

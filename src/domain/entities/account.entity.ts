@@ -9,7 +9,7 @@ import {
 import { CostumerEntity } from './costumer.entity';
 import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
 import { PixTransferReceiptEntity } from './pix.transfer.receipt.entity';
-import { BankSlipTransferReceiptDto } from 'src/application/dto/bank.splip.entity.dto';
+import { BankSlipTransferReceiptDto } from 'src/application/dto/bank.splip.transfer.receipt.dto';
 
 @Entity()
 @Check('"accountType" = 0 OR "accountType" = 1')

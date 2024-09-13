@@ -1,6 +1,14 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsISO8601,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 import { AccountType } from 'src/domain/enums/business.enum';
 import { TDestinationAccountQuery } from 'src/domain/types/shared.type';
+import { BankSlipTransferReceiptBaseDto } from './bank.splip.transfer.receipt.dto';
+import { ProcessPixDto } from './pix.dto';
 
 export class AccountNumberDto {
   @IsNotEmpty()
@@ -105,7 +113,7 @@ export type UpdateAccountDto = Partial<
 
 export class TransferDto {
   @IsNotEmpty()
-  @IsString()
+  @IsUUID()
   originAccountId: string;
 
   @IsNotEmpty()
@@ -115,4 +123,18 @@ export class TransferDto {
   @IsNotEmpty()
   @IsNumber()
   amount: number;
+}
+
+export class TransferReturnDto {
+  @IsNotEmpty()
+  @IsUUID()
+  senderId: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  recipientId: string;
+
+  @IsNotEmpty()
+  @IsISO8601()
+  transferDate: string;
 }
