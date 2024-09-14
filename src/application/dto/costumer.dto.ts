@@ -1,15 +1,40 @@
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 import { AccountDto } from './account.dto';
 
 //TODO: Trocar interface por class com validators
-export type CostumerDto = {
+export class CostumerDto {
+  @IsUUID()
   id: string;
+
+  @IsNotEmpty()
+  @IsString()
   fullname: string;
+
+  @IsNotEmpty()
+  @IsString()
   address: string;
+
+  @IsNotEmpty()
+  @IsString()
   telephone: string;
+
+  @IsNotEmpty()
+  @IsNumber()
   salaryIncome: number;
-  manager: any; //TODO: Adicionar dto correto quando for implementado
-  accounts: AccountDto;
-};
+
+  @IsNotEmpty()
+  @IsString()
+  managerId: string; //TODO: Adicionar dto correto quando for implementado
+
+  @IsOptional()
+  accounts: AccountDto[];
+}
 
 export type CreateCostumerDto = Omit<CostumerDto, 'id'>;
 

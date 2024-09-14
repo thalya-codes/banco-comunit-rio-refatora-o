@@ -1,13 +1,33 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
 
-export class OpenAccountDto {
-  @IsString()
+export class ManagerBaseDto {
   @IsNotEmpty()
-  id: string;
+  @IsString()
+  fullname: string;
 
+  @IsNotEmpty()
+  @IsString()
+  cpf: string;
+
+  customers?: any;
+}
+export class ManagerDto extends ManagerBaseDto {
+  @IsNotEmpty()
+  @IsUUID()
+  id: string;
+}
+export class OpenAccountDto {
   @IsNotEmpty()
   @IsNumber()
   accountType: number;
+
+  @IsString()
+  @IsNotEmpty()
+  customerId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  managerId: string;
 }
 
 export class CloseAccountDto {

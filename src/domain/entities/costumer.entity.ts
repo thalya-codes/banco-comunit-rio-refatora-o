@@ -2,15 +2,13 @@ import {
   Column,
   Entity,
   JoinColumn,
-  // ManyToMany,
   ManyToOne,
-  // JoinColumn,
-  // ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AccountEntity } from './account.entity';
 import { AccountDto } from 'src/application/dto/account.dto';
-// import { AccountEntity } from './Account.orm';
+import { ManagerEntity } from './manager.entity';
 
 @Entity()
 export class CostumerEntity {
@@ -26,17 +24,17 @@ export class CostumerEntity {
   @Column({ type: 'varchar' })
   telephone: string;
 
-  @Column()
-  manager: string;
-
-  @Column()
+  @ManyToOne(() => ManagerEntity, (manager) => manager.customers)
   @JoinColumn()
-  @ManyToOne(() => AccountEntity, (account) => account.costumer)
-  accounts: AccountEntity;
-  //TODO: Descomentar código abaixo quando as entidades Manager e Account forem criadas
-  // @OneToMany(() => ManagerEnity, (manager) => manager.costumers)
-  // @JoinColumn()
-  // accounts: AccountEntity;
+  managerId: string;
+
+  @OneToMany(() => AccountEntity, (account) => account.customerId, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    cascade: true,
+  })
+  accounts: AccountDto[];
 
   @Column()
   salaryIncome: number;

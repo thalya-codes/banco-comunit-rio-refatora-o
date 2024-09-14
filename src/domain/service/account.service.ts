@@ -10,13 +10,12 @@ import {
   CreateAccountDto,
   IdDto,
   TransactionDto,
+  TransferDto,
+  TransferReturnDto,
   WithdrawDto,
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from '../enums/error-messages.enum';
 import { v4 as uuidv4 } from 'uuid';
-
-//operações -> update manager
-//operações -> update manager
 @Injectable()
 export class AccountService implements IAccountService {
   constructor(
@@ -24,10 +23,6 @@ export class AccountService implements IAccountService {
     private readonly accountRepository: IAccountRepository,
   ) {}
 
-  //[x] generate account number
-  //criar class de payment
-  //criar variações p/ savings e checking
-  //criar modelo de retorno padrão
   generateAccountNumber(): string {
     return uuidv4().replace(/-/g, '').slice(0, 13);
   }
@@ -93,7 +88,7 @@ export class AccountService implements IAccountService {
   ): Promise<AccountDto> {
     try {
       return await this.accountRepository.update(alterAccountTypeDto.id, {
-        accountType: alterAccountTypeDto.newAccountType,
+        accountType: alterAccountTypeDto.type,
       });
     } catch (error) {
       console.log(error);
@@ -116,37 +111,49 @@ export class AccountService implements IAccountService {
 
       return { balance: updatedAccount.balance };
     } catch (error) {
-      return error;
+      console.error({ error });
     }
   }
 
-  //conta de destino
-  //targetAccount
-  //originAccount
-  //a forma como deposito sera feito(via pix(transferência(chave pix / número da conta)) ou boleto)
+  async transfer(transferDto: TransferDto): Promise<TransferReturnDto> {
+    const originAccount = await this.accountRepository.findOne({
+      id: transferDto.originAccountId,
+    });
 
-  //TODO: Decidir formato do retorno
+    const destinationAccount = await this.accountRepository.findOne(
+      transferDto.destinationAccountQuery,
+    );
+
+    if (originAccount.balance < transferDto.amount)
+      throw new Error(ErrorMessages.INSUFICIENT_BALANCE);
+
+    try {
+      await this.accountRepository.update(originAccount.id, {
+        balance: originAccount.balance - transferDto.amount,
+      });
+      await this.accountRepository.update(destinationAccount.id, {
+        balance: destinationAccount.balance + transferDto.amount,
+      });
+
+      return {
+        senderId: originAccount.id,
+        recipientId: destinationAccount.id,
+        transferDate: new Date().toISOString(),
+      };
+    } catch (error) {
+      console.error({ error });
+    }
+  }
+
   async deposit(transactionDto: TransactionDto) {
     try {
-      const originAccount = await this.getAccount({
-        accountNumber: transactionDto.originAccountNumber,
-      });
-
       const destinationAccount = await this.getAccount({
         accountNumber: transactionDto.destinationAccountNumber,
-      });
-
-      if (originAccount.balance < transactionDto.amount)
-        throw new Error(ErrorMessages.INSUFICIENT_BALANCE);
-
-      await this.accountRepository.update(originAccount.id, {
-        balance: originAccount.balance - transactionDto.amount,
       });
 
       await this.accountRepository.update(destinationAccount.id, {
         balance: destinationAccount.balance + transactionDto.amount,
       });
-      //todo retornar comprovante de deposito
     } catch (error) {
       console.log(error);
     }
@@ -162,11 +169,4 @@ export class AccountService implements IAccountService {
       console.log(error);
     }
   }
-
-  //TODO: Implementar após criar a classe de pagamento
-  //Tipos de pagamento
-  //a diferença entre o pix e o boleto é quando o valor estará disponível na conta de destino
-  //em caso de transferência com chave pix é necessário informar a chave pix da conta de destino e o número da conta de origem
-  //e em caso de boleto é necessário passar o número do boleto
-  // async transfer(transferDto: TransferDto): Promise<{ balance: number }> {}
 }

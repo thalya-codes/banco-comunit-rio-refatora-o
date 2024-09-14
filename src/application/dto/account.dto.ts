@@ -1,5 +1,15 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsISO8601,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 import { AccountType } from 'src/domain/enums/business.enum';
+import { TDestinationAccountQuery } from 'src/domain/types/shared.type';
+import { BankSlipTransferReceiptBaseDto } from './bank.splip.transfer.receipt.dto';
+import { ProcessPixDto } from './pix.dto';
 
 export class AccountNumberDto {
   @IsNotEmpty()
@@ -25,14 +35,15 @@ export class IdDto {
   id: string;
 }
 
+export class PixKeyDto {
+  @IsNotEmpty()
+  pix_keys: string | number;
+}
+
 export class TransactionDto {
   @IsNotEmpty()
   @IsNumber()
   amount: number;
-
-  @IsNotEmpty()
-  @IsString()
-  originAccountNumber: string;
 
   @IsNotEmpty()
   @IsString()
@@ -49,7 +60,7 @@ export class AccountDto {
   balance: number;
 
   @IsNotEmpty()
-  costumer: string[];
+  customerId: string;
 
   @IsNotEmpty()
   @IsString()
@@ -58,6 +69,12 @@ export class AccountDto {
   @IsNotEmpty()
   @IsNumber()
   accountType: number;
+
+  @IsNotEmpty()
+  pix_keys: string[] | number[];
+
+  @IsOptional()
+  bank_slip?: any;
 }
 
 export class AlterAccountTypeDto {
@@ -67,7 +84,7 @@ export class AlterAccountTypeDto {
 
   @IsNotEmpty()
   @IsNumber()
-  newAccountType: number;
+  type: AccountType;
 }
 
 export class CreateAccountDto {
@@ -87,6 +104,11 @@ export class CreateAccountDto {
   @IsNotEmpty()
   balance: number;
 
+  @IsOptional()
+  bank_slip?: any;
+}
+
+export class CreateAccountRepositoryDto extends CreateAccountDto {
   @IsString()
   @IsNotEmpty()
   accountNumber: string;
@@ -95,3 +117,31 @@ export class CreateAccountDto {
 export type UpdateAccountDto = Partial<
   Omit<AccountDto, 'id' | 'accountNumber'>
 >;
+
+export class TransferDto {
+  @IsNotEmpty()
+  @IsUUID()
+  originAccountId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  destinationAccountQuery: TDestinationAccountQuery;
+
+  @IsNotEmpty()
+  @IsNumber()
+  amount: number;
+}
+
+export class TransferReturnDto {
+  @IsNotEmpty()
+  @IsUUID()
+  senderId: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  recipientId: string;
+
+  @IsNotEmpty()
+  @IsISO8601()
+  transferDate: string;
+}

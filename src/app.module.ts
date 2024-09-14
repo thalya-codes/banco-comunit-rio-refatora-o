@@ -9,6 +9,10 @@ import { ConfigModule } from '@nestjs/config';
 import { CostumerEntity } from './domain/entities/costumer.entity';
 import { AccountService } from './domain/service/account.service';
 import { AccountEntity } from './domain/entities/account.entity';
+import { ManagerEntity } from './domain/entities/manager.entity';
+import { PixTransferReceiptEntity } from './domain/entities/pix.transfer.receipt.entity';
+import { BankSlipTransferReceiptEntity } from './domain/entities/bank.splip.transfer.receipt.entity';
+import { BankSlipEntity } from './domain/entities/bank.slip.entity';
 
 @Module({
   imports: [
@@ -17,11 +21,19 @@ import { AccountEntity } from './domain/entities/account.entity';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
+      // url: process.env.DATABASE_URL,
       database: process.env.DB_NAME,
-      port: parseInt(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      entities: [CostumerEntity, AccountEntity],
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      entities: [
+        CostumerEntity,
+        AccountEntity,
+        ManagerEntity,
+        PixTransferReceiptEntity,
+        BankSlipTransferReceiptEntity,
+        BankSlipEntity,
+      ],
       synchronize: true,
     }),
     ApplicationModule,
