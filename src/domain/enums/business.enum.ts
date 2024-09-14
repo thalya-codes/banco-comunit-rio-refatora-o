@@ -15,3 +15,8 @@ export enum PaymentMethod {
   PIX = 911,
   BANK_SLIP = 822,
 }
+
+export enum BankSplipType {
+  BARCODE = 10,
+  NUMBER = 20,
+}

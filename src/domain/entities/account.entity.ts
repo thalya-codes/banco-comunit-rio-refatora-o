@@ -2,6 +2,7 @@ import {
   Check,
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -10,6 +11,8 @@ import { CostumerEntity } from './costumer.entity';
 import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
 import { PixTransferReceiptEntity } from './pix.transfer.receipt.entity';
 import { BankSlipTransferReceiptDto } from 'src/application/dto/bank.splip.transfer.receipt.dto';
+import { BankSlipEntity } from './bank.slip.entity';
+import { BankSplipDto } from 'src/application/dto/bank.slip.dto';
 
 @Entity()
 @Check('"accountType" = 0 OR "accountType" = 1')
@@ -35,6 +38,12 @@ export class AccountEntity {
 
   @Column({ type: 'simple-array', unique: true, nullable: true })
   pix_keys: string[] | number[];
+
+  @OneToMany(() => BankSlipEntity, (bankSlip) => bankSlip.senderId, {
+    eager: true,
+    nullable: true,
+  })
+  bank_slip?: BankSplipDto[];
 
   @OneToMany(
     () => PixTransferReceiptEntity || BankSlipTransferReceiptDto,

@@ -10,8 +10,10 @@ import { ManagerService } from './service/manager.service';
 import { AccountService } from './service/account.service';
 import { TransferReceiptService } from './service/transfer.receipt.service';
 import { PixTransferReceiptEntity } from './entities/pix.transfer.receipt.entity';
-import { BankSlipTransferReceiptEntity } from './entities/bank.splip.entity';
+import { BankSlipTransferReceiptEntity } from './entities/bank.splip.transfer.receipt.entity';
 import { BankSlipTransferReceiptService } from './service/bank.slip.transfer.receipt.service';
+import { BankSlipService } from './service/bank.slip.service';
+import { BankSlipEntity } from './entities/bank.slip.entity';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { BankSlipTransferReceiptService } from './service/bank.slip.transfer.rec
       ManagerEntity,
       PixTransferReceiptEntity,
       BankSlipTransferReceiptEntity,
+      BankSlipEntity,
     ]),
     InfrastructureModule,
   ],
@@ -49,6 +52,10 @@ import { BankSlipTransferReceiptService } from './service/bank.slip.transfer.rec
       provide: 'IBankSlipTransferReceiptService',
       useClass: BankSlipTransferReceiptService,
     },
+    {
+      provide: 'IBankSlipService',
+      useClass: BankSlipService,
+    },
   ],
   exports: [
     'ICostumerService',
@@ -57,6 +64,7 @@ import { BankSlipTransferReceiptService } from './service/bank.slip.transfer.rec
     'IAccountService',
     'ITransferReceiptService',
     'IBankSlipTransferReceiptService',
+    'IBankSlipService',
   ],
 })
 export class DomainModule {}

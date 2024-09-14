@@ -12,11 +12,6 @@ import {
   UpdateAccountDto,
   WithdrawDto,
 } from 'src/application/dto/account.dto';
-import {
-  BankSlipTransferReceiptBaseDto,
-  BankSlipTransferReceiptDto,
-} from 'src/application/dto/bank.splip.transfer.receipt.dto';
-import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
 
 export interface IAccountRepository {
   create(
@@ -29,8 +24,6 @@ export interface IAccountRepository {
   save(account: AccountDto): Promise<AccountDto>;
 }
 
-//como meu repositório fica dentro do meu service e está operação fica dentro do meu service
-//eu posso apenas solicitar o número da conta de destino e o valor, aí dentro o service eu faço as manipulações
 export interface IAccountService {
   generateAccountNumber(): string;
   getAccount(getAccountDto: AccountNumberDto): Promise<AccountDto>;
@@ -44,7 +37,6 @@ export interface IAccountService {
     alterAccountTypeDto: AlterAccountTypeDto,
   ): Promise<AccountDto>;
   createAccount(createAccountDto: CreateAccountDto): Promise<AccountDto>;
-
   deposit(depositDto: TransactionDto): Promise<void>;
   withdraw(withdrawDto: WithdrawDto): Promise<{ balance: number }>;
   transfer(transferDto: TransferDto): Promise<TransferReturnDto>;

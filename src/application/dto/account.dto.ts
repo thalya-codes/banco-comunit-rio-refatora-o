@@ -2,6 +2,7 @@ import {
   IsISO8601,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   IsUUID,
 } from 'class-validator';
@@ -71,6 +72,9 @@ export class AccountDto {
 
   @IsNotEmpty()
   pix_keys: string[] | number[];
+
+  @IsOptional()
+  bank_slip?: any;
 }
 
 export class AlterAccountTypeDto {
@@ -99,6 +103,9 @@ export class CreateAccountDto {
   @IsNumber()
   @IsNotEmpty()
   balance: number;
+
+  @IsOptional()
+  bank_slip?: any;
 }
 
 export class CreateAccountRepositoryDto extends CreateAccountDto {

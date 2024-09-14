@@ -1,8 +1,10 @@
 import {
   BankSlipTransferReceiptBaseDto,
   BankSlipTransferReceiptDto,
-  GenerateBankSplipDto,
-  GenerateBankSplipReturnDto,
+  FindBankSlipTransferByBarcodeDto,
+  FindBankSlipTransferByNumberDto,
+  FindBankSlipTransferBySenderDto,
+  ProcessBankSlipDto,
 } from 'src/application/dto/bank.splip.transfer.receipt.dto';
 
 export interface IBankSlipTransferReceiptRepository {
@@ -11,19 +13,19 @@ export interface IBankSlipTransferReceiptRepository {
   ): Promise<BankSlipTransferReceiptDto | null>;
   delete(id: string): Promise<void>;
   findAllBySender(senderId: string): Promise<BankSlipTransferReceiptDto>;
-  findOne(receiptId: string): Promise<BankSlipTransferReceiptDto>;
+  findOne(
+    query:
+      | FindBankSlipTransferBySenderDto
+      | FindBankSlipTransferByBarcodeDto
+      | FindBankSlipTransferByNumberDto,
+  ): Promise<BankSlipTransferReceiptDto>;
   save(
     account: BankSlipTransferReceiptDto,
   ): Promise<BankSlipTransferReceiptDto>;
 }
 
 export interface IBankSlipTransferReceiptService {
-  generateBankSplipNumber(destinationAccount: string): string;
-  generateBarcode(yourNumber: string, amount: number): string;
-  generateBankSplip(
-    generateBankSplipDto: GenerateBankSplipDto,
-  ): Promise<GenerateBankSplipReturnDto>;
   processBankSlip(
-    processBankSlipDto: Omit<BankSlipTransferReceiptBaseDto, 'amount'>,
+    processBankSlipDto: ProcessBankSlipDto,
   ): Promise<BankSlipTransferReceiptDto>;
 }

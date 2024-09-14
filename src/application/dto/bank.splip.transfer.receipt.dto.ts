@@ -2,12 +2,40 @@ import {
   IsISO8601,
   IsNotEmpty,
   IsNumber,
-  IsObject,
   IsString,
   IsUUID,
 } from 'class-validator';
 import { TransferReceiptBaseDto } from './transfer.receipt.dto';
 
+export class FindBankSlipTransferBySenderDto {
+  @IsNotEmpty()
+  @IsUUID()
+  senderId: string;
+}
+
+export class FindBankSlipTransferByBarcodeDto {
+  @IsNotEmpty()
+  @IsString()
+  barcode: string;
+}
+
+export class FindBankSlipTransferByNumberDto {
+  @IsNotEmpty()
+  @IsString()
+  bankSlipNumber: string;
+}
+
+export class ProcessBankSlipDto {
+  @IsNotEmpty()
+  @IsUUID()
+  senderId: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  bankSlipQuery:
+    | FindBankSlipTransferByBarcodeDto
+    | FindBankSlipTransferByNumberDto;
+}
 export class BankSlipTransferReceiptBaseDto extends TransferReceiptBaseDto {
   @IsNotEmpty()
   @IsUUID()
@@ -39,35 +67,14 @@ export class BankSlipTransferReceiptDto extends BankSlipTransferReceiptBaseDto {
   @IsUUID()
   id: string;
 }
-
-import { TDestinationAccountQuery } from 'src/domain/types/shared.type';
-
-export class ProcessBankSlipDto {
-  @IsNotEmpty()
-  @IsNumber()
-  amount: number;
-
-  @IsNotEmpty()
-  @IsUUID()
-  originAccountId: string;
-
-  @IsNotEmpty()
-  @IsObject()
-  destinationAccountQuery: TDestinationAccountQuery;
-
-  @IsNotEmpty()
-  @IsISO8601()
-  dueDate: string;
-
-  @IsString()
-  @IsNotEmpty()
-  payCode: string;
-}
-
 export class GenerateBankSplipDto {
   @IsNotEmpty()
   @IsString()
-  destinationAccount: string;
+  senderAccountNumber: string;
+
+  @IsNotEmpty()
+  @IsString()
+  recipientAccountNumber: string;
 
   @IsNotEmpty()
   @IsNumber()
@@ -76,14 +83,6 @@ export class GenerateBankSplipDto {
   @IsNotEmpty()
   @IsISO8601()
   dueDate: string;
-
-  @IsNotEmpty()
-  @IsString()
-  senderId: string;
-
-  @IsNotEmpty()
-  @IsString()
-  recipientId: string;
 }
 
 export class GenerateBankSplipReturnDto {

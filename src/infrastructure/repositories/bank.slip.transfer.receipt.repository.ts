@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ITransferReceiptRepository } from 'src/domain/interfaces/transfer.receipt.interface';
 
-import { BankSlipTransferReceiptEntity } from 'src/domain/entities/bank.splip.entity';
+import { BankSlipTransferReceiptEntity } from 'src/domain/entities/bank.splip.transfer.receipt.entity';
 import {
   BankSlipTransferReceiptBaseDto,
   BankSlipTransferReceiptDto,
+  FindBankSlipTransferByBarcodeDto,
+  FindBankSlipTransferByNumberDto,
+  FindBankSlipTransferBySenderDto,
 } from 'src/application/dto/bank.splip.transfer.receipt.dto';
 import { IBankSlipTransferReceiptRepository } from 'src/domain/interfaces/bank.slip.transfer.receipt.interface';
 
@@ -30,8 +32,13 @@ export class BankSlipTransferReceiptRepository
     await this.transferReceiptRepository.delete(id);
   }
 
-  async findOne(senderId: string): Promise<BankSlipTransferReceiptDto> {
-    return await this.transferReceiptRepository.findOneByOrFail({ senderId });
+  async findOne(
+    query:
+      | FindBankSlipTransferByNumberDto
+      | FindBankSlipTransferByBarcodeDto
+      | FindBankSlipTransferBySenderDto,
+  ): Promise<BankSlipTransferReceiptDto> {
+    return await this.transferReceiptRepository.findOneByOrFail(query);
   }
 
   async findAllBySender(senderId: string): Promise<BankSlipTransferReceiptDto> {

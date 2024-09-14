@@ -16,26 +16,13 @@ import {
 } from 'src/application/dto/account.dto';
 import { ErrorMessages } from '../enums/error-messages.enum';
 import { v4 as uuidv4 } from 'uuid';
-import { ITransferReceiptService } from '../interfaces/transfer.receipt.interface';
-import { TransferReceiptDto } from 'src/application/dto/transfer.receipt.dto';
-// import { PaymentFactory } from '../factories/payment.factory';
-// import { PixPayment } from '../models/payment/pix.payment.model';
-
-//operações -> update manager
-//operações -> update manager
 @Injectable()
 export class AccountService implements IAccountService {
   constructor(
     @Inject('IAccountRepository')
     private readonly accountRepository: IAccountRepository,
-    @Inject('ITransferReceiptService')
-    private readonly transferReceiptService: ITransferReceiptService,
   ) {}
 
-  //[x] generate account number
-  //criar class de payment
-  //criar variações p/ savings e checking
-  //criar modelo de retorno padrão
   generateAccountNumber(): string {
     return uuidv4().replace(/-/g, '').slice(0, 13);
   }
@@ -158,27 +145,6 @@ export class AccountService implements IAccountService {
     }
   }
 
-  /*
-    Pagamento por boleto
-     -  conta de origem
-     -  conta de destino
-     -  número do boleto
-     -  vencimento
-     -  valor a ser pago/transferido
-  */
-
-  /*
-      Pagamento por PIX 
-        - conta de origem
-        - chave pix da conta de destino
-        - valor a ser transferido
-    */
-
-  // async transfer(transferDto: any) {
-  //   const pixPayment = new PixPayment();
-  //   await pixPayment.processPix(this.accountRepository, transferDto);
-  // }
-
   async deposit(transactionDto: TransactionDto) {
     try {
       const destinationAccount = await this.getAccount({
@@ -203,11 +169,4 @@ export class AccountService implements IAccountService {
       console.log(error);
     }
   }
-
-  //TODO: Implementar após criar a classe de pagamento
-  //Tipos de pagamento
-  //a diferença entre o pix e o boleto é quando o valor estará disponível na conta de destino
-  //em caso de transferência com chave pix é necessário informar a chave pix da conta de destino e o número da conta de origem
-  //e em caso de boleto é necessário passar o número do boleto
-  // async transfer(transferDto: TransferDto): Promise<{ balance: number }> {}
 }

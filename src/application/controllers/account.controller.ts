@@ -25,10 +25,11 @@ import { ITransferReceiptService } from 'src/domain/interfaces/transfer.receipt.
 import { ProcessPixDto } from '../dto/pix.dto';
 import { IBankSlipTransferReceiptService } from 'src/domain/interfaces/bank.slip.transfer.receipt.interface';
 import {
-  BankSlipTransferReceiptBaseDto,
   BankSlipTransferReceiptDto,
-  GenerateBankSplipDto,
+  ProcessBankSlipDto,
 } from '../dto/bank.splip.transfer.receipt.dto';
+import { IBankSlipService } from 'src/domain/interfaces/bank.splip.interface';
+import { CreateBankSlipDto } from '../dto/bank.slip.dto';
 
 interface createPixDto {
   accountNumber: string;
@@ -46,8 +47,10 @@ export class AccountController {
     private readonly managerServive: IManagerService,
     @Inject('ITransferReceiptService')
     private readonly transferReceiptService: ITransferReceiptService,
-    @Inject('ITransferReceiptService')
+    @Inject('IBankSlipTransferReceiptService')
     private readonly bankSliptTransferReceiptService: IBankSlipTransferReceiptService,
+    @Inject('IBankSlipService')
+    private readonly bankSlipService: IBankSlipService,
   ) {}
 
   @Post('create')
@@ -107,15 +110,13 @@ export class AccountController {
   }
 
   @Post('transfer/bank-slip/create')
-  async createBankSlip(@Body() generateBankSplipDto: GenerateBankSplipDto) {
-    return await this.bankSliptTransferReceiptService.generateBankSplip(
-      generateBankSplipDto,
-    );
+  async createBankSlip(@Body() createBankSlipDto: CreateBankSlipDto) {
+    return await this.bankSlipService.createBankSplip(createBankSlipDto);
   }
 
   @Post('transfer/bank-slip')
   async transferByBankSlip(
-    @Body() processBankSlipDto: Omit<BankSlipTransferReceiptBaseDto, 'amount'>,
+    @Body() processBankSlipDto: ProcessBankSlipDto,
   ): Promise<BankSlipTransferReceiptDto> {
     return await this.bankSliptTransferReceiptService.processBankSlip(
       processBankSlipDto,

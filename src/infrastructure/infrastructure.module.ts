@@ -9,7 +9,9 @@ import { ManagerRepository } from './repositories/manager.repository';
 import { TransferReceiptRepository } from './repositories/transfer.receipt.repository';
 import { PixTransferReceiptEntity } from 'src/domain/entities/pix.transfer.receipt.entity';
 import { BankSlipTransferReceiptRepository } from './repositories/bank.slip.transfer.receipt.repository';
-import { BankSlipTransferReceiptEntity } from 'src/domain/entities/bank.splip.entity';
+import { BankSlipTransferReceiptEntity } from 'src/domain/entities/bank.splip.transfer.receipt.entity';
+import { BankSlipEntity } from 'src/domain/entities/bank.slip.entity';
+import { BankSlipRepository } from './repositories/bank.slip.repository';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { BankSlipTransferReceiptEntity } from 'src/domain/entities/bank.splip.en
       ManagerEntity,
       PixTransferReceiptEntity,
       BankSlipTransferReceiptEntity,
+      BankSlipEntity,
     ]),
   ],
   providers: [
@@ -42,6 +45,10 @@ import { BankSlipTransferReceiptEntity } from 'src/domain/entities/bank.splip.en
       provide: 'IBankSlipTransferReceiptRepository',
       useClass: BankSlipTransferReceiptRepository,
     },
+    {
+      provide: 'IBankSlipRepository',
+      useClass: BankSlipRepository,
+    },
   ],
   exports: [
     'ICostumerRepository',
@@ -49,6 +56,7 @@ import { BankSlipTransferReceiptEntity } from 'src/domain/entities/bank.splip.en
     'IManagerRepository',
     'ITransferReceiptRepository',
     'IBankSlipTransferReceiptRepository',
+    'IBankSlipRepository',
   ],
 })
 export class InfrastructureModule {}

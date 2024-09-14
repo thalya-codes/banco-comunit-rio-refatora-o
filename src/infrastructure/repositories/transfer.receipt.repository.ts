@@ -26,8 +26,8 @@ export class TransferReceiptRepository implements ITransferReceiptRepository {
     await this.transferReceiptRepository.delete(id);
   }
 
-  async findOne(senderId: string): Promise<TransferReceiptDto> {
-    return await this.transferReceiptRepository.findOneByOrFail({ senderId });
+  async findOne(query): Promise<TransferReceiptDto> {
+    return await this.transferReceiptRepository.findOneByOrFail(query);
   }
 
   async findAllBySender(senderId: string): Promise<TransferReceiptDto> {

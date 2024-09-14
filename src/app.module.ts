@@ -11,7 +11,8 @@ import { AccountService } from './domain/service/account.service';
 import { AccountEntity } from './domain/entities/account.entity';
 import { ManagerEntity } from './domain/entities/manager.entity';
 import { PixTransferReceiptEntity } from './domain/entities/pix.transfer.receipt.entity';
-import { BankSlipTransferReceiptEntity } from './domain/entities/bank.splip.entity';
+import { BankSlipTransferReceiptEntity } from './domain/entities/bank.splip.transfer.receipt.entity';
+import { BankSlipEntity } from './domain/entities/bank.slip.entity';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { BankSlipTransferReceiptEntity } from './domain/entities/bank.splip.enti
         ManagerEntity,
         PixTransferReceiptEntity,
         BankSlipTransferReceiptEntity,
+        BankSlipEntity,
       ],
       synchronize: true,
     }),
